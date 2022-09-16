@@ -8,20 +8,28 @@ import {
   barInputColor,
   barInputTextColor,
   barTextColor,
+  inputPadding,
+  nameTextWidth,
+  barHeight,
+  scoreWidth,
+  nameWrapperWidth,
+  barInputWidth,
+  nameTextMargin,
+  barInputMargin,
 } from "../../colors";
 
 export const PlayerHeaderWrapper = styled.li`
   display: flex;
-  padding-left: 15px;
   background-color: ${barBackgroundColor1};
-  max-width: 700px;
-  height: 75px;
-  justify-content: space-between;
+  height: ${barHeight};
 `;
 
 export const NameHeaderWrapper = styled.div`
   display: ${(props) => (props.visibility === false ? "visible" : "hidden")};
-  padding: 7.5px 9px 0 0;
+  display: flex;
+  align-items: center;
+  min-width: ${nameWrapperWidth};
+  max-width: ${nameWrapperWidth};
 `;
 
 export const NameHeaderInput = styled.input`
@@ -31,10 +39,9 @@ export const NameHeaderInput = styled.input`
   background-color: ${barInputColor};
   color: ${barInputTextColor};
   border: none;
-  min-width: 575px;
   border-radius: ${inputRadius};
-  padding: 0 11px;
-  height: 60px;
+  padding: ${inputPadding};
+  min-width: 550px;
   margin-left: 70px;
 `;
 
@@ -43,39 +50,40 @@ export const NameHeaderText = styled.label`
   font-size: ${textFontSize};
   color: ${barTextColor};
   display: block;
-  margin-top: 20px;
-  width: 597px;
   display: block;
   font-weight: bold;
+  max-width: ${nameTextWidth};
+  margin-left: ${nameTextMargin};
 `;
 
 export const ScoreNameWrapper = styled.div`
   background-color: ${(props) =>
     props.color === 1 ? barBackgroundColor1 : barBackgroundColor2};
-  height: 100%;
-  min-width: 195px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: ${scoreWidth};
 `;
 
 export const ScoreNameInput = styled.input`
-  display: ${(props) => (props.visibility === true ? "" : "none")};
+  display: ${(props) => (props.visibility === true ? "block" : "none")};
   font-family: ${textFontFamily};
   font-size: ${textFontSize};
   background-color: ${barInputColor};
   color: ${barInputTextColor};
   border: none;
-  width: 158px;
   border-radius: ${inputRadius};
-  padding: 0 11px;
-  height: 60px;
-  margin: 7.5px 7.5px 0 7.5px;
+  padding: ${inputPadding};
+  width: ${barInputWidth};
+  margin: ${barInputMargin};
 `;
 
 export const ScoreNameText = styled.label`
   visibility: ${(props) => (props.visibility === false ? "visible" : "hidden")};
   font-size: ${textFontSize};
   color: ${barTextColor};
-  margin-top: 28px;
   display: block;
   font-weight: bold;
   text-align: center;
+  margin: auto;
 `;

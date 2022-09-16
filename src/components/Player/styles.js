@@ -15,15 +15,18 @@ import {
   secondaryBackgroundColor,
   playerHover,
   secondaryButtonBorder,
+  buttonSize,
+  nameTextMargin,
+  nameTextWidth,
+  scoreWidth,
+  scorePadding,
+  nameWrapperWidth,
+  scoreTextWidth,
 } from "../../colors";
 
 export const PlayerWrapper = styled.li`
   display: flex;
-  padding-left: 15px;
   background-color: ${backgroundColor1};
-  max-width: 700px;
-  height: 75px;
-  justify-content: space-between;
   :hover {
     background-color: ${playerHover};
   }
@@ -31,20 +34,22 @@ export const PlayerWrapper = styled.li`
 
 export const NameWrapper = styled.div`
   display: flex;
+  align-items: center;
+  min-width: ${nameWrapperWidth};
+  max-width: ${nameWrapperWidth};
 `;
 
 export const DeleteButton = styled.button`
   display: ${(props) => (props.visibility === true ? "block" : "none")};
-
   font-size: ${textFontSize};
   font-weight: bold;
   border: ${secondaryButtonBorder};
   background-color: ${secondaryBackgroundColor};
-  width: 60px;
-  height: 60px;
   border-radius: ${buttonRadius};
   color: ${secondaryTextColor};
-  margin: 7.5px 10px 0 0;
+  height: ${buttonSize};
+  min-width: ${buttonSize};
+  margin-left: ${nameTextMargin};
 
   :hover {
     background-color: ${secondaryButtonColor};
@@ -55,16 +60,19 @@ export const DeleteButton = styled.button`
 export const NameText = styled.p`
   font-size: ${textFontSize};
   color: ${textColor};
-  margin: 30px 10px 0 0;
-  width: 596px;
+  margin-left: ${nameTextMargin};
+  max-width: ${nameTextWidth};
+  min-width: ${nameTextWidth};
 `;
 
 export const ScoreWrapper = styled.div`
   background-color: ${(props) =>
     props.color === 1 ? backgroundColor1 : backgroundColor2};
   display: flex;
-  padding: 0 7.5px;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: ${scoreWidth};
+  padding: ${(props) => (props.visibility === true ? scorePadding : "0")};
 `;
 
 export const MinusButton = styled.button`
@@ -73,10 +81,10 @@ export const MinusButton = styled.button`
   font-weight: bold;
   border: ${secondaryButtonBorder};
   background-color: ${secondaryBackgroundColor};
-  width: 60px;
   color: ${secondaryTextColor};
   border-radius: ${buttonRadius};
-  margin: 7.5px 0;
+  height: ${buttonSize};
+  width: ${buttonSize};
 
   :hover {
     background-color: ${secondaryButtonColor};
@@ -88,12 +96,12 @@ export const PlusButton = styled.button`
   display: ${(props) => (props.visibility === true ? "block" : "none")};
   font-size: ${textFontSize};
   font-weight: bold;
-  width: 60px;
   border: none;
   color: ${primaryButtonTextColor};
   background-color: ${primaryButtonColor};
   border-radius: ${buttonRadius};
-  margin: 7.5px 0;
+  height: ${buttonSize};
+  width: ${buttonSize};
 
   :hover {
     background-color: ${primaryButtonHoverColor};
@@ -103,8 +111,6 @@ export const PlusButton = styled.button`
 export const ScoreText = styled.p`
   font-size: ${textFontSize};
   color: ${textColor};
-  padding: 0 10px;
-  width ${(props) => (props.editmode === true ? "40px" : "160px")};
   text-align: center;
-  margin-top: 30px;
+  width: ${scoreTextWidth};
 `;

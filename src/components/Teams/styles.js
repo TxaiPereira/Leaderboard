@@ -6,20 +6,22 @@ import {
   backgroundColor1,
   backgroundColor2,
   playerHover,
+  nameTextMargin,
+  nameTextWidth,
+  scoreWidth,
+  nameWrapperWidth,
+  sectionMarginTop,
 } from "../../colors";
 
 export const TeamList = styled.ul`
   margin: 0;
   padding: 0;
+  margin-top: ${sectionMarginTop};
 `;
 
 export const TeamWrapper = styled.li`
   display: ${(props) => (props.visibility === true ? "flex" : "none")};
-  padding-left: 15px;
   background-color: ${backgroundColor1};
-  max-width: 700px;
-  height: 75px;
-  justify-content: space-between;
   :hover {
     background-color: ${playerHover};
   }
@@ -27,28 +29,29 @@ export const TeamWrapper = styled.li`
 
 export const NameWrapper = styled.div`
   display: flex;
+  align-items: center;
+  min-width: ${nameWrapperWidth};
+  max-width: ${nameWrapperWidth};
 `;
 
 export const NameText = styled.p`
   font-size: ${textFontSize};
   color: ${textColor};
-  margin: 30px 10px 0 0;
-  width: ${(props) => (props.editmode == true ? "665px" : "596px")};
+  min-width: ${nameTextWidth};
+  margin-left: ${nameTextMargin};
 `;
 
 export const ScoreWrapper = styled.div`
   background-color: ${(props) =>
     props.color === 1 ? backgroundColor1 : backgroundColor2};
   display: flex;
-  padding: 0 7.5px;
-  height: 100%;
+  width: ${scoreWidth};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ScoreText = styled.p`
   font-size: ${textFontSize};
   color: ${textColor};
-  padding: 0 10px;
-  width ${(props) => (props.editmode === true ? "40px" : "160px")};
   text-align: center;
-  margin-top: 30px;
 `;

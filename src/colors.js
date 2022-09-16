@@ -1,6 +1,3 @@
-// export const backgroundColor1 = "#36393f";
-// export const backgroundColor2 = "#2f3136";
-
 const white = "#fff";
 const black = "#000";
 const grey = "#f5f5f5";
@@ -23,7 +20,14 @@ export const textFontSize = "1em";
 export const textFontFamily = "Montserrat";
 export const playerHover = darkGrey;
 
+export const nameWrapperWidth = "670px";
+export const nameTextMargin = "10px";
+export const nameTextWidth = "600px";
+export const scoreWidth = "175px";
+export const scorePadding = "10px 0";
+
 export const buttonRadius = "5px";
+export const buttonSize = "60px";
 
 export const primaryButtonColor = purple;
 export const primaryButtonHoverColor = lightPurple;
@@ -44,6 +48,19 @@ export const inputColor = white;
 export const inputTextColor = darkerGrey;
 export const inputBorder = "2px solid " + darkerGrey;
 export const inputRadius = "5px";
+export const inputPadding = "20px 15px";
+export const barInputWidth = "120px";
 export const barInputColor = lightPurple;
 export const barInputTextColor = white;
+export const barInputMargin = "10px";
 export const barTextColor = white;
+export const barHeight = "80px";
+export const scoreTextWidth = "40px";
+
+export const sectionMarginTop = "20px";
+export const settingsWrapperPadding = "15px 0";
+export const optionWrapperPadding = "5px 0";
+export const newPlayerWrapperWidth = "660px";
+export const newPlayerInputWidth1 = "250px";
+export const newPlayerInputWidth2 = "550px";
+export const numberInputWidth = "85px";

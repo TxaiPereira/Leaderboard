@@ -34,7 +34,6 @@ function Teams({ players, isTeamsEnabled, amountOfScores, editmode }) {
               }
             : team
         );
-        console.log(tempTeams);
       }
     });
     setTeams(tempTeams);

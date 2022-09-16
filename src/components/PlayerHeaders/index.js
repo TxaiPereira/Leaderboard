@@ -38,7 +38,7 @@ function PlayerHeaders({ visibility, amountOfScores }) {
         <NameHeaderText visibility={visibility}>{nameText}</NameHeaderText>
       </NameHeaderWrapper>
 
-      <ScoreNameWrapper color={2}>
+      <ScoreNameWrapper color={2} editmode={visibility}>
         <ScoreNameInput
           visibility={visibility}
           maxLength={10}

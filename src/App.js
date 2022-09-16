@@ -40,7 +40,6 @@ function App() {
   // Adds new player with given name
   const addPlayer = () => {
     if (newPlayerName.length >= 1) {
-      console.log("11 " + newTeamName);
       const newPlayerObj = {
         name: newPlayerName,
         team: newTeamName,
@@ -144,7 +143,7 @@ function App() {
                   {isTeamsEnabled === true && " (" + player.team + ")"}
                 </NameText>
               </NameWrapper>
-              <ScoreWrapper color={2}>
+              <ScoreWrapper color={2} visibility={isEditMode}>
                 <MinusButton
                   visibility={isEditMode}
                   onClick={() => decreaseScoreHandler(player, index, 1)}
