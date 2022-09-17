@@ -43,13 +43,15 @@ export const DeleteButton = styled.button`
   display: ${(props) => (props.visibility === true ? "block" : "none")};
   font-size: ${textFontSize};
   font-weight: bold;
-  border: ${secondaryButtonBorder};
-  background-color: ${secondaryBackgroundColor};
+  border: transparent;
+  background-color: transparent;
   border-radius: ${buttonRadius};
-  color: ${secondaryTextColor};
+  color: transparent;
   height: ${buttonSize};
   min-width: ${buttonSize};
   margin-left: ${nameTextMargin};
+
+  position: absolute;
 
   :hover {
     background-color: ${secondaryButtonColor};

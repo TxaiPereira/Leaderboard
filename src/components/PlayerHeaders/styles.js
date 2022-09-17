@@ -43,7 +43,7 @@ export const NameHeaderInput = styled.input`
   border-radius: ${inputRadius};
   padding: ${inputPadding};
   min-width: ${nameHeaderInputWidth};
-  margin-left: 70px;
+  margin-left: 10px;
 `;
 
 export const NameHeaderText = styled.label`

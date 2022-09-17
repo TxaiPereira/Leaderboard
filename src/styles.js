@@ -28,11 +28,13 @@ import {
   newPlayerInputWidth1,
   newPlayerInputWidth2,
   numberInputWidth,
+  bodyWidth,
 } from "./colors";
 
 export const Body = styled.div`
   background-color: ${bodyColor1};
   height: 100vh;
+  max-width: ${bodyWidth};
 `;
 
 export const PlayerList = styled.ul`
