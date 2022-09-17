@@ -20,9 +20,9 @@ export const textFontSize = "1em";
 export const textFontFamily = "Montserrat";
 export const playerHover = darkGrey;
 
-export const nameWrapperWidth = "670px";
+export const nameWrapperWidth = "330px";
 export const nameTextMargin = "10px";
-export const nameTextWidth = "600px";
+export const nameTextWidth = "330px";
 export const scoreWidth = "175px";
 export const scorePadding = "10px 0";
 
@@ -56,6 +56,7 @@ export const barInputMargin = "10px";
 export const barTextColor = white;
 export const barHeight = "80px";
 export const scoreTextWidth = "40px";
+export const nameHeaderInputWidth = "220px";
 
 export const sectionMarginTop = "20px";
 export const settingsWrapperPadding = "15px 0";

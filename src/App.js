@@ -223,7 +223,7 @@ function App() {
       <SettingsWrapper editMode={isEditMode}>
         <NewPlayerWrapper visibility={isEditMode}>
           <NewPlayerInput
-            maxLength={32}
+            maxLength={12}
             type="text"
             value={newPlayerName}
             placeholder="Player name"
@@ -234,7 +234,7 @@ function App() {
           />
           <NewTeamInput
             visibility={isTeamsEnabled}
-            maxLength={32}
+            maxLength={12}
             type="text"
             value={newTeamName}
             placeholder="Team name"

@@ -16,6 +16,7 @@ import {
   barInputWidth,
   nameTextMargin,
   barInputMargin,
+  nameHeaderInputWidth,
 } from "../../colors";
 
 export const PlayerHeaderWrapper = styled.li`
@@ -41,7 +42,7 @@ export const NameHeaderInput = styled.input`
   border: none;
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  min-width: 550px;
+  min-width: ${nameHeaderInputWidth};
   margin-left: 70px;
 `;
 
