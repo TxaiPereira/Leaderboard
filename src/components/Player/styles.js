@@ -59,6 +59,7 @@ export const DeleteButton = styled.button`
 
 export const NameText = styled.p`
   font-size: ${textFontSize};
+  font-weight: 500;
   color: ${textColor};
   margin-left: ${nameTextMargin};
   max-width: ${nameTextWidth};

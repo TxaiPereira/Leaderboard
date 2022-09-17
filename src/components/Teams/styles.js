@@ -32,6 +32,7 @@ export const NameWrapper = styled.div`
   align-items: center;
   min-width: ${nameWrapperWidth};
   max-width: ${nameWrapperWidth};
+  font-weight: 500;
 `;
 
 export const NameText = styled.p`
