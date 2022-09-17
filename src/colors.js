@@ -9,7 +9,7 @@ const purple = "#6202ee";
 const darkPurple = "#4b01d1";
 const lightPurple = "#9453f3";
 
-export const bodyWidth = "950px";
+export const bodyWidth = "970px";
 export const bodyColor1 = white;
 export const backgroundColor1 = grey;
 export const backgroundColor2 = darkGrey;
@@ -20,9 +20,9 @@ export const textFontSize = "1em";
 export const textFontFamily = "Montserrat";
 export const playerHover = darkGrey;
 
-export const nameWrapperWidth = "250px";
+export const nameWrapperWidth = "270px";
 export const nameTextMargin = "10px";
-export const nameTextWidth = "250px";
+export const nameTextWidth = "270px";
 export const scoreWidth = "175px";
 export const scorePadding = "10px 0";
 
@@ -56,12 +56,12 @@ export const barInputMargin = "10px";
 export const barTextColor = white;
 export const barHeight = "80px";
 export const scoreTextWidth = "40px";
-export const nameHeaderInputWidth = "200px";
+export const nameHeaderInputWidth = "220px";
 
 export const sectionMarginTop = "20px";
 export const settingsWrapperPadding = "15px 0";
 export const optionWrapperPadding = "5px 0";
-export const newPlayerWrapperWidth = "408px";
-export const newPlayerInputWidth1 = "130px";
-export const newPlayerInputWidth2 = "300px";
+export const newPlayerWrapperWidth = "428px";
+export const newPlayerInputWidth1 = "140px";
+export const newPlayerInputWidth2 = "325px";
 export const numberInputWidth = "85px";

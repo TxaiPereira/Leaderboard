@@ -79,7 +79,7 @@ export const AddPlayerButton = styled.button`
   color: ${primaryButtonTextColor};
   background-color: ${primaryButtonColor};
   border-radius: ${buttonRadius};
-  height: ${buttonSize};
+  min-height: 100%;
   width: ${buttonSize};
 
   :hover {
