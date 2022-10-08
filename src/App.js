@@ -4,7 +4,6 @@ import PlayerHeaders from "./components/PlayerHeaders";
 import Teams from "./components/Teams";
 import {
   Body,
-  PlayerList,
   NewPlayerWrapper,
   NewPlayerInput,
   AddPlayerButton,
@@ -22,6 +21,11 @@ import {
 } from "./styles";
 
 import {
+  PlayerList,
+  EmptyMessageWrapper,
+  EmptyMessage2,
+  EmptyMessage1,
+  MessageImg,
   PlayerItem,
   PlayerButton,
   NameWrapper,
@@ -246,6 +250,13 @@ function App() {
           visibility={isEditMode}
           amountOfScores={amountOfScores}
         />
+        {players.length === 0 && (
+          <EmptyMessageWrapper>
+            <MessageImg />
+            <EmptyMessage1>No players yet!</EmptyMessage1>
+            <EmptyMessage2>Add players to fill this list.</EmptyMessage2>
+          </EmptyMessageWrapper>
+        )}
         {players.map((player, index) => (
           <PlayerItem>
             <PlayerButton onClick={() => popupPlayer(player, index)}>

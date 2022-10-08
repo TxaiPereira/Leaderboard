@@ -25,10 +25,46 @@ import {
 import PlusImg from "./assets/plus.svg";
 import MinusImg from "./assets/minus.svg";
 import MinusImg2 from "./assets/minus2.svg";
+import standingImg from "./assets/standing.svg";
 
-export const PlayerItem = styled.tr`
-  border: 0px solid transparent;
+export const PlayerList = styled.table`
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-collapse: collapse;
+  border-top-width: 0px;
+  border-top-style: none;
 `;
+
+export const EmptyMessageWrapper = styled.tr`
+  background-color: ${backgroundColor1};
+  color: ${textColor};
+  text-align: center;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const EmptyMessage1 = styled.p`
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 1.5em;
+`;
+
+export const EmptyMessage2 = styled.p`
+  margin: 5px 0;
+`;
+
+export const MessageImg = styled.div`
+  background-image: url(${standingImg});
+  min-height: 100px;
+  width: 120px;
+  border: none;
+`;
+
+export const PlayerItem = styled.tr``;
 
 export const PlayerButton = styled.button`
   padding: 0;

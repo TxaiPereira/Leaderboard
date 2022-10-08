@@ -1,6 +1,9 @@
 {
   "name": "scoreboard",
-  "version": "0.1.0",
+  "description": "Scoreboard that keeps track of 1-4 scores per player and team.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Txai Pereira de Lacerda",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

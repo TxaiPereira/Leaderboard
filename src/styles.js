@@ -42,15 +42,6 @@ export const Body = styled.div`
   }
 `;
 
-export const PlayerList = styled.table`
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-collapse: collapse;
-  border-top-width: 0px;
-  border-top-style: none;
-`;
-
 export const NewPlayerWrapper = styled.div`
   display: flex;
   width: 100%;
