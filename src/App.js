@@ -50,21 +50,23 @@ function App() {
   const [amountOfScores, changeAmountOfScore] = useState(1);
   const [isTeamsEnabled, toggleTeams] = useState(true);
   const [isPlayerPopupVisible, setPlayerPopupVisible] = useState(false);
-  const [selectedPlayer, setSelectedPlayer] = useState({});
+
+  const newPlayerObj = {
+    name: newPlayerName,
+    team: newTeamName,
+    placement: "",
+    score1: 0,
+    score2: 0,
+    score3: 0,
+    score4: 0,
+  };
+
+  const [selectedPlayer, setSelectedPlayer] = useState(newPlayerObj);
   const [sortedBy, setSortedBy] = useState("score1");
 
   // Adds new player with given name
   const addPlayer = () => {
     if (newPlayerName.length >= 1) {
-      const newPlayerObj = {
-        name: newPlayerName,
-        team: newTeamName,
-        placement: "",
-        score1: 0,
-        score2: 0,
-        score3: 0,
-        score4: 0,
-      };
       setPlayers((players) => [...players, newPlayerObj]);
       setNewPlayerName("");
     }
@@ -115,7 +117,7 @@ function App() {
     setPlayerPopupVisible(false);
   };
 
-  // Gives players a placement based on their score
+  // Gives players a placement based on their score1
   const placePlayers = (players) => {
     const highestScore = Math.max(...players.map((p) => p.score1));
 
@@ -166,73 +168,71 @@ function App() {
 
   return (
     <Body>
-      {isPlayerPopupVisible && (
-        <PlayerPopUpWrapper>
-          <PlayerPopUp>
-            <H1>
-              {selectedPlayer.name} ({selectedPlayer.team})
-            </H1>
-            <PopupScoreWrapper color={2}>
-              <PopupScoreText>
-                {"Score1: "} {selectedPlayer.score1}
-              </PopupScoreText>
-              <ButtonsWrapper>
-                <MinusButton
-                  onClick={() => decreaseScoreHandler(selectedPlayer, 1)}
-                />
-                <PlusButton
-                  onClick={() => increaseScoreHandler(selectedPlayer, 1)}
-                />
-              </ButtonsWrapper>
-            </PopupScoreWrapper>
-            <PopupScoreWrapper color={1}>
-              <PopupScoreText>
-                {"Score2: "} {selectedPlayer.score2}
-              </PopupScoreText>
-              <ButtonsWrapper>
-                <MinusButton
-                  onClick={() => decreaseScoreHandler(selectedPlayer, 2)}
-                />
-                <PlusButton
-                  onClick={() => increaseScoreHandler(selectedPlayer, 2)}
-                />
-              </ButtonsWrapper>
-            </PopupScoreWrapper>
-            <PopupScoreWrapper color={2}>
-              <PopupScoreText>
-                {"Score3: "} {selectedPlayer.score3}
-              </PopupScoreText>
-              <ButtonsWrapper>
-                <MinusButton
-                  onClick={() => decreaseScoreHandler(selectedPlayer, 3)}
-                />
-                <PlusButton
-                  onClick={() => increaseScoreHandler(selectedPlayer, 3)}
-                />
-              </ButtonsWrapper>
-            </PopupScoreWrapper>
-            <PopupScoreWrapper color={1}>
-              <PopupScoreText>
-                {"Score4: "} {selectedPlayer.score4}
-              </PopupScoreText>
-              <ButtonsWrapper>
-                <MinusButton
-                  onClick={() => decreaseScoreHandler(selectedPlayer, 4)}
-                />
-                <PlusButton
-                  onClick={() => increaseScoreHandler(selectedPlayer, 4)}
-                />
-              </ButtonsWrapper>
-            </PopupScoreWrapper>
-            <SaveButton onClick={() => setPlayerPopupVisible(false)}>
-              Save
-            </SaveButton>
-            <DeleteButton onClick={() => deletePlayer(selectedPlayer)}>
-              Delete
-            </DeleteButton>
-          </PlayerPopUp>
-        </PlayerPopUpWrapper>
-      )}
+      <PlayerPopUpWrapper visibility={isPlayerPopupVisible}>
+        <PlayerPopUp visibility={isPlayerPopupVisible}>
+          <H1>
+            {selectedPlayer.name} ({selectedPlayer.team})
+          </H1>
+          <PopupScoreWrapper color={2}>
+            <PopupScoreText>
+              {"Score1: "} {selectedPlayer.score1}
+            </PopupScoreText>
+            <ButtonsWrapper>
+              <MinusButton
+                onClick={() => decreaseScoreHandler(selectedPlayer, 1)}
+              />
+              <PlusButton
+                onClick={() => increaseScoreHandler(selectedPlayer, 1)}
+              />
+            </ButtonsWrapper>
+          </PopupScoreWrapper>
+          <PopupScoreWrapper color={1}>
+            <PopupScoreText>
+              {"Score2: "} {selectedPlayer.score2}
+            </PopupScoreText>
+            <ButtonsWrapper>
+              <MinusButton
+                onClick={() => decreaseScoreHandler(selectedPlayer, 2)}
+              />
+              <PlusButton
+                onClick={() => increaseScoreHandler(selectedPlayer, 2)}
+              />
+            </ButtonsWrapper>
+          </PopupScoreWrapper>
+          <PopupScoreWrapper color={2}>
+            <PopupScoreText>
+              {"Score3: "} {selectedPlayer.score3}
+            </PopupScoreText>
+            <ButtonsWrapper>
+              <MinusButton
+                onClick={() => decreaseScoreHandler(selectedPlayer, 3)}
+              />
+              <PlusButton
+                onClick={() => increaseScoreHandler(selectedPlayer, 3)}
+              />
+            </ButtonsWrapper>
+          </PopupScoreWrapper>
+          <PopupScoreWrapper color={1}>
+            <PopupScoreText>
+              {"Score4: "} {selectedPlayer.score4}
+            </PopupScoreText>
+            <ButtonsWrapper>
+              <MinusButton
+                onClick={() => decreaseScoreHandler(selectedPlayer, 4)}
+              />
+              <PlusButton
+                onClick={() => increaseScoreHandler(selectedPlayer, 4)}
+              />
+            </ButtonsWrapper>
+          </PopupScoreWrapper>
+          <SaveButton onClick={() => setPlayerPopupVisible(false)}>
+            Save
+          </SaveButton>
+          <DeleteButton onClick={() => deletePlayer(selectedPlayer)}>
+            Delete
+          </DeleteButton>
+        </PlayerPopUp>
+      </PlayerPopUpWrapper>
 
       <Teams
         players={players}

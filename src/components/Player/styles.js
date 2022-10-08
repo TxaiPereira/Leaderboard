@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 import {
   textColor,
@@ -19,6 +19,7 @@ import {
   buttonSize,
   nameTextMargin,
   scoreTextWidth,
+  shadowColor,
 } from "../../colors";
 
 import PlusImg from "./assets/plus.svg";
@@ -124,15 +125,23 @@ export const ScoreText = styled.p`
 
 export const PlayerPopUpWrapper = styled.div`
   position: absolute;
-  display: flex;
+  display: ${(props) => (props.visibility === true ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   height: 100vh;
   z-index: 2;
   width: 100%;
   align-self: center;
+`;
 
-  @media only screen and (min-width: 992px) {
+export const slideInTop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 `;
 
@@ -145,10 +154,16 @@ export const PlayerPopUp = styled.div`
   height: 90vh;
   background-color: ${backgroundColor1};
   border-radius: 20px;
+  box-shadow: 0 0 10px ${shadowColor};
+  animation: ${(props) =>
+    props.visibility &&
+    css`
+      ${slideInTop} 0.3s ease-in
+    `};
+  };
 
   @media only screen and (min-width: 992px) {
     width: 50%;
-
     height: 66vh;
   }
 `;
@@ -198,7 +213,7 @@ export const PopupScoreWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
   padding: 10px 0;
   justify-content: space-between;
 `;

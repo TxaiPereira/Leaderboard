@@ -49,13 +49,13 @@ export const PlayerList = styled.ul`
 
 export const NewPlayerWrapper = styled.div`
   display: ${(props) => (props.visibility === true ? "flex" : "none")};
-  width: 96%;
-  margin-left: 10px;
-  /*justify-content: space-between;*/
+  width: 100%;
+  margin: 0 5px 0 10px;
 `;
 
 export const NewPlayerInputWrapper = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const NewPlayerInput = styled.input`
@@ -66,7 +66,7 @@ export const NewPlayerInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: ${(props) => (props.teamsEnabled === true ? "40%" : "100%")};
+  width: ${(props) => (props.teamsEnabled === true ? "42%" : "100%")};
   margin-right: 10px;
 `;
 
@@ -79,7 +79,7 @@ export const NewTeamInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: 40%;
+  width: 42%;
   margin-right: 10px;
 `;
 
@@ -93,6 +93,7 @@ export const AddPlayerButton = styled.button`
   background-position: center;
   border-radius: ${buttonRadius};
   min-width: ${buttonSize};
+  margin-right: 20px;
 
   :hover {
     background-color: ${primaryButtonHoverColor};
