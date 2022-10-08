@@ -43,6 +43,7 @@ import {
   ButtonsWrapper,
   PopupScoreText,
   H1,
+  TeamName,
 } from "./components/Player/styles";
 
 function App() {
@@ -175,7 +176,7 @@ function App() {
       <PlayerPopUpWrapper visibility={isPlayerPopupVisible}>
         <PlayerPopUp visibility={isPlayerPopupVisible}>
           <H1>
-            {selectedPlayer.name} ({selectedPlayer.team})
+            {selectedPlayer.name} <TeamName>({selectedPlayer.team})</TeamName>
           </H1>
           <PopupScoreWrapper color={2}>
             <PopupScoreText>

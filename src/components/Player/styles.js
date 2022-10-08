@@ -206,7 +206,14 @@ export const PlayerPopUp = styled.div`
 
 export const H1 = styled.h1`
   color: ${textColor};
+  font-size: 1.2em;
   text-align: center;
+  margin: 0px;
+`;
+
+export const TeamName = styled.span`
+  display: block;
+  margin-bottom: 20px;
 `;
 
 export const SaveButton = styled.button`
