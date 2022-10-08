@@ -6,6 +6,7 @@ import {
   NameText,
   ScoreWrapper,
   ScoreText,
+  ScoresWrapper,
 } from "./styles";
 
 function Teams({ players, isTeamsEnabled, amountOfScores, editmode }) {
@@ -52,24 +53,26 @@ function Teams({ players, isTeamsEnabled, amountOfScores, editmode }) {
             <NameWrapper>
               <NameText editmode={editmode}>{team.name}</NameText>
             </NameWrapper>
-            <ScoreWrapper color={2}>
-              <ScoreText editmode={false}>{team.score1}</ScoreText>
-            </ScoreWrapper>
-            {amountOfScores >= 2 && (
-              <ScoreWrapper color={1}>
-                <ScoreText editmode={false}>{team.score2}</ScoreText>
-              </ScoreWrapper>
-            )}
-            {amountOfScores >= 3 && (
+            <ScoresWrapper>
               <ScoreWrapper color={2}>
-                <ScoreText editmode={false}>{team.score3}</ScoreText>
+                <ScoreText editmode={false}>{team.score1}</ScoreText>
               </ScoreWrapper>
-            )}
-            {amountOfScores >= 4 && (
-              <ScoreWrapper color={1}>
-                <ScoreText editmode={false}>{team.score4}</ScoreText>
-              </ScoreWrapper>
-            )}
+              {amountOfScores >= 2 && (
+                <ScoreWrapper color={1}>
+                  <ScoreText editmode={false}>{team.score2}</ScoreText>
+                </ScoreWrapper>
+              )}
+              {amountOfScores >= 3 && (
+                <ScoreWrapper color={2}>
+                  <ScoreText editmode={false}>{team.score3}</ScoreText>
+                </ScoreWrapper>
+              )}
+              {amountOfScores >= 4 && (
+                <ScoreWrapper color={1}>
+                  <ScoreText editmode={false}>{team.score4}</ScoreText>
+                </ScoreWrapper>
+              )}
+            </ScoresWrapper>
           </TeamWrapper>
         ))}
     </TeamList>

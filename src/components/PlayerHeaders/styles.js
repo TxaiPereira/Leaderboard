@@ -11,8 +11,6 @@ import {
   inputPadding,
   nameTextWidth,
   barHeight,
-  scoreWidth,
-  nameWrapperWidth,
   barInputWidth,
   nameTextMargin,
   barInputMargin,
@@ -23,14 +21,16 @@ export const PlayerHeaderWrapper = styled.li`
   display: flex;
   background-color: ${barBackgroundColor1};
   height: ${barHeight};
+  justify-content: space-between;
+  flex-direction: reverse-row;
+  width: 100%;
 `;
 
 export const NameHeaderWrapper = styled.div`
   display: ${(props) => (props.visibility === false ? "visible" : "hidden")};
   display: flex;
   align-items: center;
-  min-width: ${nameWrapperWidth};
-  max-width: ${nameWrapperWidth};
+  width: 40%;
 `;
 
 export const NameHeaderInput = styled.input`
@@ -43,18 +43,23 @@ export const NameHeaderInput = styled.input`
   border-radius: ${inputRadius};
   padding: ${inputPadding};
   min-width: ${nameHeaderInputWidth};
-  margin-left: 10px;
+  margin: 0 10px;
 `;
 
 export const NameHeaderText = styled.label`
-  visibility: ${(props) => (props.visibility === false ? "visible" : "hidden")};
   font-size: ${textFontSize};
   color: ${barTextColor};
-  display: block;
   display: block;
   font-weight: bold;
   max-width: ${nameTextWidth};
   margin-left: ${nameTextMargin};
+  width: 100%;
+`;
+
+export const ScoreNamesWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
 `;
 
 export const ScoreNameWrapper = styled.div`
@@ -63,7 +68,8 @@ export const ScoreNameWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: ${scoreWidth};
+  width: 25%;
+  overflow-wrap: anywhere;
 `;
 
 export const ScoreNameInput = styled.input`
@@ -80,7 +86,6 @@ export const ScoreNameInput = styled.input`
 `;
 
 export const ScoreNameText = styled.label`
-  visibility: ${(props) => (props.visibility === false ? "visible" : "hidden")};
   font-size: ${textFontSize};
   color: ${barTextColor};
   display: block;

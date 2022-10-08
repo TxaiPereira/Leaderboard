@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import {
   PlayerHeaderWrapper,
   NameHeaderWrapper,
-  NameHeaderInput,
   NameHeaderText,
   ScoreNameWrapper,
-  ScoreNameInput,
   ScoreNameText,
+  ScoreNamesWrapper,
 } from "./styles";
 
 function PlayerHeaders({ visibility, amountOfScores }) {
@@ -28,63 +27,34 @@ function PlayerHeaders({ visibility, amountOfScores }) {
   return (
     <PlayerHeaderWrapper>
       <NameHeaderWrapper>
-        <NameHeaderInput
-          visibility={visibility}
-          maxLength={32}
-          type="text"
-          placeholder="Examples: Players, Participants"
-          onChange={(e) => setNameText(e.target.value)}
-        />
-        <NameHeaderText visibility={visibility}>{nameText}</NameHeaderText>
+        <NameHeaderText>{nameText}</NameHeaderText>
       </NameHeaderWrapper>
 
-      <ScoreNameWrapper color={2} editmode={visibility}>
-        <ScoreNameInput
-          visibility={visibility}
-          maxLength={10}
-          type="text"
-          placeholder="Score 1"
-          onChange={(e) => changeScoreName(e.target.value, 0)}
-        />
-        <ScoreNameText visibility={visibility}>{scoreNames[0]}</ScoreNameText>
-      </ScoreNameWrapper>
+      <ScoreNamesWrapper>
+        <ScoreNameWrapper
+          color={2}
+          editmode={visibility}
+          amountOfScores={amountOfScores}
+        >
+          <ScoreNameText>{scoreNames[0]}</ScoreNameText>
+        </ScoreNameWrapper>
 
-      {amountOfScores >= 2 && (
-        <ScoreNameWrapper color={1}>
-          <ScoreNameInput
-            visibility={visibility}
-            maxLength={10}
-            type="text"
-            placeholder="Score 2"
-            onChange={(e) => changeScoreName(e.target.value, 1)}
-          />
-          <ScoreNameText visibility={visibility}>{scoreNames[1]}</ScoreNameText>
-        </ScoreNameWrapper>
-      )}
-      {amountOfScores >= 3 && (
-        <ScoreNameWrapper color={2}>
-          <ScoreNameInput
-            visibility={visibility}
-            maxLength={10}
-            type="text"
-            placeholder="Score 3"
-            onChange={(e) => changeScoreName(e.target.value, 2)}
-          />
-          <ScoreNameText visibility={visibility}>{scoreNames[2]}</ScoreNameText>
-        </ScoreNameWrapper>
-      )}
-      {amountOfScores >= 4 && (
-        <ScoreNameWrapper color={1}>
-          <ScoreNameInput
-            visibility={visibility}
-            maxLength={10}
-            type="text"
-            placeholder="Score 4"
-            onChange={(e) => changeScoreName(e.target.value, 3)}
-          />
-          <ScoreNameText visibility={visibility}>{scoreNames[3]}</ScoreNameText>
-        </ScoreNameWrapper>
-      )}
+        {amountOfScores >= 2 && (
+          <ScoreNameWrapper color={1} amountOfScores={amountOfScores}>
+            <ScoreNameText>{scoreNames[1]}</ScoreNameText>
+          </ScoreNameWrapper>
+        )}
+        {amountOfScores >= 3 && (
+          <ScoreNameWrapper color={2} amountOfScores={amountOfScores}>
+            <ScoreNameText>{scoreNames[2]}</ScoreNameText>
+          </ScoreNameWrapper>
+        )}
+        {amountOfScores >= 4 && (
+          <ScoreNameWrapper color={1} amountOfScores={amountOfScores}>
+            <ScoreNameText>{scoreNames[3]}</ScoreNameText>
+          </ScoreNameWrapper>
+        )}
+      </ScoreNamesWrapper>
     </PlayerHeaderWrapper>
   );
 }

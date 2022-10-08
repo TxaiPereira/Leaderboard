@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PlayerHeaders from "./components/PlayerHeaders";
 import Teams from "./components/Teams";
 import {
@@ -16,10 +16,14 @@ import {
   NumberInput,
   SettingsWrapper,
   NewTeamInput,
+  NewPlayerInputWrapper,
+  DropDownList,
+  DropDownItem,
 } from "./styles";
 
 import {
-  PlayerWrapper,
+  PlayerItem,
+  PlayerButton,
   NameWrapper,
   DeleteButton,
   NameText,
@@ -27,15 +31,27 @@ import {
   MinusButton,
   ScoreText,
   PlusButton,
+  ScoresWrapper,
+  PlayerPopUpWrapper,
+  SaveButton,
+  PlayerPopUp,
+  PopupScoreWrapper,
+  ButtonsWrapper,
+  PopupScoreText,
+  H1,
 } from "./components/Player/styles";
 
 function App() {
+  // useStates
   const [players, setPlayers] = useState([]);
   const [newPlayerName, setNewPlayerName] = useState("");
   const [newTeamName, setTeamName] = useState("Team 1");
   const [isEditMode, toggleEditMode] = useState(true);
   const [amountOfScores, changeAmountOfScore] = useState(1);
   const [isTeamsEnabled, toggleTeams] = useState(true);
+  const [isPlayerPopupVisible, setPlayerPopupVisible] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState({});
+  const [sortedBy, setSortedBy] = useState("score1");
 
   // Adds new player with given name
   const addPlayer = () => {
@@ -55,7 +71,7 @@ function App() {
   };
 
   // Increases given player score by 1
-  const increaseScoreHandler = (player, index, scoreIndex) => {
+  const increaseScoreHandler = (player, scoreIndex) => {
     if (scoreIndex === 1) {
       player.score1 = player.score1 + 1;
     } else if (scoreIndex === 2) {
@@ -66,13 +82,15 @@ function App() {
       player.score4 = player.score4 + 1;
     }
 
+    const index = players.findIndex((p) => p.name === player.name);
+
     const newPlayers = [...players];
     newPlayers[index] = player;
     placePlayers(newPlayers);
   };
 
   // Decreases given player score by 1
-  const decreaseScoreHandler = (player, index, scoreIndex) => {
+  const decreaseScoreHandler = (player, scoreIndex) => {
     if (scoreIndex === 1) {
       player.score1 = player.score1 - 1;
     } else if (scoreIndex === 2) {
@@ -82,6 +100,9 @@ function App() {
     } else if (scoreIndex === 4) {
       player.score4 = player.score4 - 1;
     }
+
+    const index = players.findIndex((p) => p.name === player.name);
+
     const newPlayers = [...players];
     newPlayers[index] = player;
     placePlayers(newPlayers);
@@ -91,6 +112,7 @@ function App() {
   const deletePlayer = (player) => {
     const newPlayers = players.filter((p) => p !== player);
     placePlayers(newPlayers);
+    setPlayerPopupVisible(false);
   };
 
   // Gives players a placement based on their score
@@ -117,101 +139,100 @@ function App() {
       }
     });
 
+    players = sortPlayers(players);
+
     setPlayers(players);
+  };
+
+  // Sorts players by selected score
+  const sortPlayers = (players) => {
+    if (sortedBy === "score1") {
+      players.sort((a, b) => (a.score1 < b.score1 ? 1 : -1));
+    } else if (sortedBy === "score2") {
+      players.sort((a, b) => (a.score2 < b.score2 ? 1 : -1));
+    } else if (sortedBy === "score3") {
+      players.sort((a, b) => (a.score3 < b.score3 ? 1 : -1));
+    } else if (sortedBy === "score4") {
+      players.sort((a, b) => (a.score4 < b.score4 ? 1 : -1));
+    }
+    return players;
+  };
+
+  // Shows player popup
+  const popupPlayer = (player) => {
+    setSelectedPlayer(player);
+    setPlayerPopupVisible(true);
   };
 
   return (
     <Body>
-      <PlayerList>
-        <PlayerHeaders
-          visibility={isEditMode}
-          amountOfScores={amountOfScores}
-        />
-        {players
-          .sort((a, b) => (a.score1 < b.score1 ? 1 : -1))
-          .map((player, index) => (
-            <PlayerWrapper>
-              <NameWrapper>
-                <DeleteButton
-                  visibility={isEditMode}
-                  onClick={() => deletePlayer(player, index)}
-                >
-                  X
-                </DeleteButton>
-                <NameText>
-                  {player.placement} {player.name}
-                  {isTeamsEnabled === true && " (" + player.team + ")"}
-                </NameText>
-              </NameWrapper>
-              <ScoreWrapper color={2} visibility={isEditMode}>
+      {isPlayerPopupVisible && (
+        <PlayerPopUpWrapper>
+          <PlayerPopUp>
+            <H1>
+              {selectedPlayer.name} ({selectedPlayer.team})
+            </H1>
+            <PopupScoreWrapper color={2}>
+              <PopupScoreText>
+                {"Score1: "} {selectedPlayer.score1}
+              </PopupScoreText>
+              <ButtonsWrapper>
                 <MinusButton
-                  visibility={isEditMode}
-                  onClick={() => decreaseScoreHandler(player, index, 1)}
-                >
-                  -
-                </MinusButton>
-                <ScoreText editmode={isEditMode}>{player.score1}</ScoreText>
+                  onClick={() => decreaseScoreHandler(selectedPlayer, 1)}
+                />
                 <PlusButton
-                  visibility={isEditMode}
-                  onClick={() => increaseScoreHandler(player, index, 1)}
-                >
-                  +
-                </PlusButton>
-              </ScoreWrapper>
-              {amountOfScores >= 2 && (
-                <ScoreWrapper color={1}>
-                  <MinusButton
-                    visibility={isEditMode}
-                    onClick={() => decreaseScoreHandler(player, index, 2)}
-                  >
-                    -
-                  </MinusButton>
-                  <ScoreText editmode={isEditMode}>{player.score2}</ScoreText>
-                  <PlusButton
-                    visibility={isEditMode}
-                    onClick={() => increaseScoreHandler(player, index, 2)}
-                  >
-                    +
-                  </PlusButton>
-                </ScoreWrapper>
-              )}
-              {amountOfScores >= 3 && (
-                <ScoreWrapper color={2}>
-                  <MinusButton
-                    visibility={isEditMode}
-                    onClick={() => decreaseScoreHandler(player, index, 3)}
-                  >
-                    -
-                  </MinusButton>
-                  <ScoreText editmode={isEditMode}>{player.score3}</ScoreText>
-                  <PlusButton
-                    visibility={isEditMode}
-                    onClick={() => increaseScoreHandler(player, index, 3)}
-                  >
-                    +
-                  </PlusButton>
-                </ScoreWrapper>
-              )}
-              {amountOfScores >= 4 && (
-                <ScoreWrapper color={1}>
-                  <MinusButton
-                    visibility={isEditMode}
-                    onClick={() => decreaseScoreHandler(player, index, 4)}
-                  >
-                    -
-                  </MinusButton>
-                  <ScoreText editmode={isEditMode}>{player.score4}</ScoreText>
-                  <PlusButton
-                    visibility={isEditMode}
-                    onClick={() => increaseScoreHandler(player, index, 4)}
-                  >
-                    +
-                  </PlusButton>
-                </ScoreWrapper>
-              )}
-            </PlayerWrapper>
-          ))}
-      </PlayerList>
+                  onClick={() => increaseScoreHandler(selectedPlayer, 1)}
+                />
+              </ButtonsWrapper>
+            </PopupScoreWrapper>
+            <PopupScoreWrapper color={1}>
+              <PopupScoreText>
+                {"Score2: "} {selectedPlayer.score2}
+              </PopupScoreText>
+              <ButtonsWrapper>
+                <MinusButton
+                  onClick={() => decreaseScoreHandler(selectedPlayer, 2)}
+                />
+                <PlusButton
+                  onClick={() => increaseScoreHandler(selectedPlayer, 2)}
+                />
+              </ButtonsWrapper>
+            </PopupScoreWrapper>
+            <PopupScoreWrapper color={2}>
+              <PopupScoreText>
+                {"Score3: "} {selectedPlayer.score3}
+              </PopupScoreText>
+              <ButtonsWrapper>
+                <MinusButton
+                  onClick={() => decreaseScoreHandler(selectedPlayer, 3)}
+                />
+                <PlusButton
+                  onClick={() => increaseScoreHandler(selectedPlayer, 3)}
+                />
+              </ButtonsWrapper>
+            </PopupScoreWrapper>
+            <PopupScoreWrapper color={1}>
+              <PopupScoreText>
+                {"Score4: "} {selectedPlayer.score4}
+              </PopupScoreText>
+              <ButtonsWrapper>
+                <MinusButton
+                  onClick={() => decreaseScoreHandler(selectedPlayer, 4)}
+                />
+                <PlusButton
+                  onClick={() => increaseScoreHandler(selectedPlayer, 4)}
+                />
+              </ButtonsWrapper>
+            </PopupScoreWrapper>
+            <SaveButton onClick={() => setPlayerPopupVisible(false)}>
+              Save
+            </SaveButton>
+            <DeleteButton onClick={() => deletePlayer(selectedPlayer)}>
+              Delete
+            </DeleteButton>
+          </PlayerPopUp>
+        </PlayerPopUpWrapper>
+      )}
 
       <Teams
         players={players}
@@ -220,29 +241,70 @@ function App() {
         editmode={isEditMode}
       />
 
+      <PlayerList>
+        <PlayerHeaders
+          visibility={isEditMode}
+          amountOfScores={amountOfScores}
+        />
+        {players.map((player, index) => (
+          <PlayerItem>
+            <PlayerButton onClick={() => popupPlayer(player, index)}>
+              <NameWrapper>
+                <NameText>
+                  {player.placement} {player.name}
+                  {isTeamsEnabled === true && " (" + player.team + ")"}
+                </NameText>
+              </NameWrapper>
+              <ScoresWrapper>
+                <ScoreWrapper color={2}>
+                  <ScoreText>{player.score1}</ScoreText>
+                </ScoreWrapper>
+                {amountOfScores >= 2 && (
+                  <ScoreWrapper color={1}>
+                    <ScoreText>{player.score2}</ScoreText>
+                  </ScoreWrapper>
+                )}
+                {amountOfScores >= 3 && (
+                  <ScoreWrapper color={2}>
+                    <ScoreText>{player.score3}</ScoreText>
+                  </ScoreWrapper>
+                )}
+                {amountOfScores >= 4 && (
+                  <ScoreWrapper color={1}>
+                    <ScoreText>{player.score4}</ScoreText>
+                  </ScoreWrapper>
+                )}
+              </ScoresWrapper>
+            </PlayerButton>
+          </PlayerItem>
+        ))}
+      </PlayerList>
+
       <SettingsWrapper editMode={isEditMode}>
         <NewPlayerWrapper visibility={isEditMode}>
-          <NewPlayerInput
-            maxLength={12}
-            type="text"
-            value={newPlayerName}
-            placeholder="Player name"
-            onChange={(e) => {
-              setNewPlayerName(e.target.value);
-            }}
-            teamsEnabled={isTeamsEnabled}
-          />
-          <NewTeamInput
-            visibility={isTeamsEnabled}
-            maxLength={12}
-            type="text"
-            value={newTeamName}
-            placeholder="Team name"
-            onChange={(e) => {
-              setTeamName(e.target.value);
-            }}
-          />
-          <AddPlayerButton onClick={addPlayer}>Add player</AddPlayerButton>
+          <NewPlayerInputWrapper>
+            <NewPlayerInput
+              maxLength={12}
+              type="text"
+              value={newPlayerName}
+              placeholder="Player name"
+              onChange={(e) => {
+                setNewPlayerName(e.target.value);
+              }}
+              teamsEnabled={isTeamsEnabled}
+            />
+            <NewTeamInput
+              visibility={isTeamsEnabled}
+              maxLength={12}
+              type="text"
+              value={newTeamName}
+              placeholder="Team name"
+              onChange={(e) => {
+                setTeamName(e.target.value);
+              }}
+            />
+          </NewPlayerInputWrapper>
+          <AddPlayerButton onClick={addPlayer} />
         </NewPlayerWrapper>
 
         <OptionWrapper visibility={true}>
@@ -277,6 +339,21 @@ function App() {
             max="4"
             value={amountOfScores}
           />
+        </OptionWrapper>
+
+        <OptionWrapper visibility={isEditMode}>
+          <Label>Sort by</Label>
+          <DropDownList
+            onChange={(e) => {
+              setSortedBy(e.target.value);
+              placePlayers(players);
+            }}
+          >
+            <DropDownItem value="score1">Score1</DropDownItem>
+            <DropDownItem value="score2">Score2</DropDownItem>
+            <DropDownItem value="score3">Score3</DropDownItem>
+            <DropDownItem value="score4">Score4</DropDownItem>
+          </DropDownList>
         </OptionWrapper>
       </SettingsWrapper>
     </Body>

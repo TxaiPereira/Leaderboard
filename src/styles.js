@@ -20,21 +20,26 @@ import {
   inputBorder,
   inputPadding,
   buttonSize,
-  sectionMarginTop,
-  nameTextMargin,
+  sectionMargin,
   settingsWrapperPadding,
-  newPlayerWrapperWidth,
   optionWrapperPadding,
-  newPlayerInputWidth1,
-  newPlayerInputWidth2,
   numberInputWidth,
-  bodyWidth,
 } from "./colors";
+
+import AddPlayerImg from "./assets/add_player.svg";
 
 export const Body = styled.div`
   background-color: ${bodyColor1};
   height: 100vh;
-  max-width: ${bodyWidth};
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin: 0;
+  @media only screen and (min-width: 992px) {
+    margin: 0 auto;
+    width: 45%;
+  }
 `;
 
 export const PlayerList = styled.ul`
@@ -44,9 +49,13 @@ export const PlayerList = styled.ul`
 
 export const NewPlayerWrapper = styled.div`
   display: ${(props) => (props.visibility === true ? "flex" : "none")};
-  width: ${newPlayerWrapperWidth};
-  justify-content: space-between;
-  padding-left: ${nameTextMargin};
+  width: 96%;
+  margin-left: 10px;
+  /*justify-content: space-between;*/
+`;
+
+export const NewPlayerInputWrapper = styled.div`
+  display: flex;
 `;
 
 export const NewPlayerInput = styled.input`
@@ -57,8 +66,8 @@ export const NewPlayerInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: ${(props) =>
-    props.teamsEnabled === true ? newPlayerInputWidth1 : newPlayerInputWidth2};
+  width: ${(props) => (props.teamsEnabled === true ? "40%" : "100%")};
+  margin-right: 10px;
 `;
 
 export const NewTeamInput = styled.input`
@@ -70,7 +79,8 @@ export const NewTeamInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: ${newPlayerInputWidth1};
+  width: 40%;
+  margin-right: 10px;
 `;
 
 export const AddPlayerButton = styled.button`
@@ -78,9 +88,11 @@ export const AddPlayerButton = styled.button`
   border: none;
   color: ${primaryButtonTextColor};
   background-color: ${primaryButtonColor};
+  background-image: url(${AddPlayerImg});
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: ${buttonRadius};
-  min-height: 100%;
-  width: ${buttonSize};
+  min-width: ${buttonSize};
 
   :hover {
     background-color: ${primaryButtonHoverColor};
@@ -92,6 +104,43 @@ export const Label = styled.label`
   color: ${textColor};
   font-weight: 500;
   margin: 10px 15px;
+`;
+
+export const OptionWrapper = styled.div`
+  display: ${(props) => (props.visibility === true ? "flex" : "none")};
+  align-items: center;
+  padding: ${optionWrapperPadding};
+  width: 100%;
+`;
+
+export const NumberInput = styled.input`
+  font-family: ${textFontFamily};
+  font-size: ${textFontSize};
+  background-color: ${inputColor};
+  color: ${inputTextColor};
+  border: ${inputBorder};
+  border-radius: ${inputRadius};
+  padding: ${inputPadding};
+  width: ${numberInputWidth};
+`;
+
+export const DropDownList = styled.select`
+  font-family: ${textFontFamily};
+  font-size: ${textFontSize};
+  background-color: ${inputColor};
+  color: ${inputTextColor};
+  border: ${inputBorder};
+  border-radius: ${inputRadius};
+  padding: ${inputPadding};
+`;
+
+export const DropDownItem = styled.option``;
+
+export const SettingsWrapper = styled.div`
+  background-color: ${backgroundColor1};
+  margin-top: ${sectionMargin};
+  padding: ${settingsWrapperPadding};
+  width: 100%;
 `;
 
 // Source: https://codesandbox.io/s/custom-checkbox-and-radiobutton-with-react-and-styled-components-6h3st?from-embed=&file=/src/ToggleSwitch.js
@@ -141,27 +190,4 @@ export const Slider = styled.span`
     transform: ${(props) =>
       props.visibility === true ? "translateX(2.6em);" : ""};
   }
-`;
-
-export const OptionWrapper = styled.div`
-  display: ${(props) => (props.visibility === true ? "flex" : "none")};
-  align-items: center;
-  padding: ${optionWrapperPadding};
-`;
-
-export const NumberInput = styled.input`
-  font-family: ${textFontFamily};
-  font-size: ${textFontSize};
-  background-color: ${inputColor};
-  color: ${inputTextColor};
-  border: ${inputBorder};
-  border-radius: ${inputRadius};
-  padding: ${inputPadding};
-  width: ${numberInputWidth};
-`;
-
-export const SettingsWrapper = styled.div`
-  background-color: ${backgroundColor1};
-  margin-top: ${sectionMarginTop};
-  padding: ${settingsWrapperPadding};
 `;
