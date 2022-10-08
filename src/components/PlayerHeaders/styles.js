@@ -17,16 +17,17 @@ import {
   nameHeaderInputWidth,
 } from "../../colors";
 
-export const PlayerHeaderWrapper = styled.li`
+export const PlayerHeaderWrapper = styled.tr`
   display: flex;
   background-color: ${barBackgroundColor1};
   height: ${barHeight};
   justify-content: space-between;
   flex-direction: reverse-row;
   width: 100%;
+  text-align: left;
 `;
 
-export const NameHeaderWrapper = styled.div`
+export const NameHeaderWrapper = styled.th`
   display: ${(props) => (props.visibility === false ? "visible" : "hidden")};
   display: flex;
   align-items: center;
@@ -62,7 +63,7 @@ export const ScoreNamesWrapper = styled.div`
   width: 60%;
 `;
 
-export const ScoreNameWrapper = styled.div`
+export const ScoreNameWrapper = styled.th`
   background-color: ${(props) =>
     props.color === 1 ? barBackgroundColor1 : barBackgroundColor2};
   display: flex;

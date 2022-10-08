@@ -26,8 +26,8 @@ import PlusImg from "./assets/plus.svg";
 import MinusImg from "./assets/minus.svg";
 import MinusImg2 from "./assets/minus2.svg";
 
-export const PlayerItem = styled.li`
-  list-style: none;
+export const PlayerItem = styled.tr`
+  border: 0px solid transparent;
 `;
 
 export const PlayerButton = styled.button`
@@ -46,7 +46,7 @@ export const PlayerButton = styled.button`
   height: 60px;
 `;
 
-export const NameWrapper = styled.div`
+export const NameWrapper = styled.td`
   display: flex;
   align-items: center;
   width: 40%;
@@ -67,7 +67,7 @@ export const ScoresWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const ScoreWrapper = styled.div`
+export const ScoreWrapper = styled.td`
   background-color: ${(props) =>
     props.color === 1 ? backgroundColor1 : backgroundColor2};
   display: flex;

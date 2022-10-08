@@ -54,8 +54,8 @@ export const scoreTextWidth = "40px";
 export const nameHeaderInputWidth = "100%";
 
 export const sectionMargin = "20px";
-export const settingsWrapperPadding = "15px 0";
+export const settingsWrapperPadding = "10px 0";
 export const optionWrapperPadding = "5px 0";
-export const numberInputWidth = "85px";
+export const numberInputWidth = "76px";
 
 export const shadowColor = "#999";

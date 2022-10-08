@@ -281,7 +281,7 @@ function App() {
       </PlayerList>
 
       <SettingsWrapper editMode={isEditMode}>
-        <NewPlayerWrapper visibility={isEditMode}>
+        <NewPlayerWrapper>
           <NewPlayerInputWrapper>
             <NewPlayerInput
               maxLength={12}

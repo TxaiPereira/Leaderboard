@@ -42,15 +42,19 @@ export const Body = styled.div`
   }
 `;
 
-export const PlayerList = styled.ul`
+export const PlayerList = styled.table`
   margin: 0;
   padding: 0;
+  border: none;
+  border-collapse: collapse;
+  border-top-width: 0px;
+  border-top-style: none;
 `;
 
 export const NewPlayerWrapper = styled.div`
-  display: ${(props) => (props.visibility === true ? "flex" : "none")};
+  display: flex;
   width: 100%;
-  margin: 0 5px 0 10px;
+  padding: 0 5px 5px 10px;
 `;
 
 export const NewPlayerInputWrapper = styled.div`
@@ -66,7 +70,7 @@ export const NewPlayerInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: ${(props) => (props.teamsEnabled === true ? "42%" : "100%")};
+  width: ${(props) => (props.teamsEnabled === true ? "45%" : "100%")};
   margin-right: 10px;
 `;
 
@@ -79,7 +83,7 @@ export const NewTeamInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: 42%;
+  width: 45%;
   margin-right: 10px;
 `;
 
@@ -104,14 +108,14 @@ export const Label = styled.label`
   font-size: ${textFontSize};
   color: ${textColor};
   font-weight: 500;
-  margin: 10px 15px;
 `;
 
 export const OptionWrapper = styled.div`
   display: ${(props) => (props.visibility === true ? "flex" : "none")};
   align-items: center;
   padding: ${optionWrapperPadding};
-  width: 100%;
+  justify-content: space-between;
+  padding: 5px 10px;
 `;
 
 export const NumberInput = styled.input`

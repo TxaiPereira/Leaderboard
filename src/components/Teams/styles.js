@@ -11,14 +11,18 @@ import {
   sectionMargin,
 } from "../../colors";
 
-export const TeamList = styled.ul`
+export const TeamList = styled.table`
   margin: 0;
   padding: 0;
   margin: ${sectionMargin} 0;
   width: 100%;
+  border: none;
+  border-collapse: collapse;
+  border-top-width: 0px;
+  border-top-style: none;
 `;
 
-export const TeamWrapper = styled.li`
+export const TeamWrapper = styled.tr`
   display: ${(props) => (props.visibility === true ? "flex" : "none")};
   background-color: ${backgroundColor1};
   :hover {
@@ -28,7 +32,7 @@ export const TeamWrapper = styled.li`
   justify-content: space-between;
 `;
 
-export const NameWrapper = styled.div`
+export const NameWrapper = styled.td`
   display: flex;
   align-items: center;
   min-width: ${nameWrapperWidth};
@@ -49,7 +53,7 @@ export const ScoresWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const ScoreWrapper = styled.div`
+export const ScoreWrapper = styled.td`
   background-color: ${(props) =>
     props.color === 1 ? backgroundColor1 : backgroundColor2};
   display: flex;
