@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from "react";
-import {
-  TeamList,
-  TeamWrapper,
-  NameWrapper,
-  ScoreWrapper,
-  ScoreText,
-} from "./styles";
+import { TeamList, TeamWrapper, NameWrapper, ScoreWrapper } from "./styles";
 import PlayerHeaders from "../PlayerHeaders";
 
-function Teams({ players, isTeamsEnabled, amountOfScores }) {
+function Teams({ players, isTeamsEnabled, amountOfScores, scoreNames }) {
   const [teams, setTeams] = useState([]);
 
   const countTeamScores = () => {
     let tempTeams = [];
     players.forEach((player) => {
       if (!tempTeams.filter((t) => t.name === player.team).length > 0) {
+        // If the players team doesnt exist yet, add it
         tempTeams.push({
           name: player.team,
-          score1: player.score1,
-          score2: player.score2,
-          score3: player.score3,
-          score4: player.score4,
+          scores: player.scores,
         });
       } else if (tempTeams.filter((t) => t.name === player.team).length > 0) {
+        // If the players team does exist yet, add their score to the team
         tempTeams = tempTeams.map((team) =>
           team.name === player.team
             ? {
                 ...team,
-                score1: team.score1 + player.score1,
-                score2: team.score2 + player.score2,
-                score3: team.score3 + player.score3,
-                score4: team.score4 + player.score4,
+                scores: [
+                  team.scores[0] + player.scores[0],
+                  team.scores[1] + player.scores[1],
+                  team.scores[2] + player.scores[2],
+                  team.scores[3] + player.scores[3],
+                ],
               }
             : team
         );
@@ -45,22 +40,26 @@ function Teams({ players, isTeamsEnabled, amountOfScores }) {
 
   return (
     <TeamList isTeamsEnabled={isTeamsEnabled}>
-      <PlayerHeaders amountOfScores={amountOfScores} hasTeams={true} />
+      <PlayerHeaders
+        amountOfScores={amountOfScores}
+        hasTeams={true}
+        scoreNames={scoreNames}
+      />
       <tbody>
         {teams
-          .sort((a, b) => (a.score1 < b.score1 ? 1 : -1))
-          .map((team, index) => (
+          .sort((a, b) => (a.scores[0] < b.scores[0] ? 1 : -1))
+          .map((team) => (
             <TeamWrapper key={team.name}>
               <NameWrapper>{team.name}</NameWrapper>
-              <ScoreWrapper color={2}>{team.score1}</ScoreWrapper>
+              <ScoreWrapper color={2}>{team.scores[0]}</ScoreWrapper>
               {amountOfScores >= 2 && (
-                <ScoreWrapper color={1}>{team.score2}</ScoreWrapper>
+                <ScoreWrapper color={1}>{team.scores[1]}</ScoreWrapper>
               )}
               {amountOfScores >= 3 && (
-                <ScoreWrapper color={2}>{team.score3}</ScoreWrapper>
+                <ScoreWrapper color={2}>{team.scores[2]}</ScoreWrapper>
               )}
               {amountOfScores >= 4 && (
-                <ScoreWrapper color={1}>{team.score4}</ScoreWrapper>
+                <ScoreWrapper color={1}>{team.scores[3]}</ScoreWrapper>
               )}
             </TeamWrapper>
           ))}

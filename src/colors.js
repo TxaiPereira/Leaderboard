@@ -12,7 +12,8 @@ export const backgroundColor2 = darkGrey;
 export const barBackgroundColor1 = purple;
 export const barBackgroundColor2 = darkPurple;
 export const textColor = white;
-export const textFontSize = "0.9em";
+export const textFontSize2 = "0.9em";
+export const textFontSize = "1em";
 export const textFontFamily = "Montserrat";
 export const playerHover = darkGrey;
 

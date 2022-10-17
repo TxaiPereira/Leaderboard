@@ -3,6 +3,7 @@ import styled, { keyframes, css } from "styled-components";
 import {
   textColor,
   textFontSize,
+  textFontSize2,
   textFontFamily,
   buttonRadius,
   backgroundColor1,
@@ -41,11 +42,11 @@ export const EmptyMessageWrapper = styled.div`
   background-color: ${backgroundColor1};
   color: ${textColor};
   text-align: center;
-  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px 0;
 `;
 
 export const EmptyMessage1 = styled.p`
@@ -82,6 +83,10 @@ export const PlayerItem = styled.tr`
   :hover {
     background-color: ${playerHover};
   }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const NameWrapper = styled.td`
@@ -94,6 +99,10 @@ export const NameWrapper = styled.td`
   overflow-wrap: anywhere;
   text-align: left;
   padding: 10px 0 10px 10px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const ScoreWrapper = styled.td`
@@ -127,6 +136,10 @@ export const MinusButton = styled.button`
     color: ${secondaryTextHoverColor};
     background-image: url(${MinusImg2});
   }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const PlusButton = styled.button`
@@ -147,6 +160,10 @@ export const PlusButton = styled.button`
   :hover {
     background-color: ${primaryButtonHoverColor};
   }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const ScoreText = styled.p`
@@ -154,6 +171,10 @@ export const ScoreText = styled.p`
   color: ${textColor};
   text-align: center;
   width: 40px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const PlayerPopUpWrapper = styled.div`
@@ -185,7 +206,7 @@ export const PlayerPopUp = styled.div`
   align-items: center;
   flex-direction: column;
   width: 90%;
-  height: 90vh;
+  padding: 5% 0;
   background-color: ${backgroundColor1};
   border-radius: 20px;
   box-shadow: 0 0 10px ${shadowColor};
@@ -198,7 +219,7 @@ export const PlayerPopUp = styled.div`
 
   @media only screen and (min-width: 992px) {
     width: 50%;
-    height: 66vh;
+    padding: 3% 0;
   }
 `;
 
@@ -224,11 +245,15 @@ export const SaveButton = styled.button`
   background-color: ${primaryButtonColor};
   border-radius: ${buttonRadius};
   width: 90%;
-  height: ${buttonSize};
+  min-height: ${buttonSize};
   margin: 15px 0;
 
   :hover {
     background-color: ${primaryButtonHoverColor};
+  }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
   }
 `;
 
@@ -241,12 +266,16 @@ export const DeleteButton = styled.button`
   background-color: ${secondaryBackgroundColor};
   color: ${secondaryTextColor};
   border-radius: ${buttonRadius};
-  height: ${buttonSize};
+  min-height: ${buttonSize};
   width: 90%;
 
   :hover {
     background-color: ${secondaryButtonColor};
     color: ${secondaryTextHoverColor};
+  }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
   }
 `;
 
@@ -274,4 +303,8 @@ export const PopupScoreText = styled.p`
   color: ${textColor};
   text-align: center;
   width: 60%;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;

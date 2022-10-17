@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   inputRadius,
   textFontSize,
+  textFontSize2,
   textColor,
   backgroundColor1,
   buttonRadius,
@@ -61,6 +62,10 @@ export const NewPlayerInput = styled.input`
   padding: ${inputPadding};
   width: ${(props) => (props.teamsEnabled === true ? "46%" : "100%")};
   margin-right: 10px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const NewTeamInput = styled.input`
@@ -74,11 +79,14 @@ export const NewTeamInput = styled.input`
   padding: ${inputPadding};
   width: 46%;
   margin-right: 10px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const AddPlayerButton = styled.button`
   cursor: pointer;
-  font-size: ${textFontSize};
   border: none;
   color: ${primaryButtonTextColor};
   background-color: ${primaryButtonColor};
@@ -98,6 +106,10 @@ export const Label = styled.label`
   font-size: ${textFontSize};
   color: ${textColor};
   font-weight: 500;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const OptionWrapper = styled.div`
@@ -108,6 +120,19 @@ export const OptionWrapper = styled.div`
   padding: 5px 10px;
 `;
 
+export const ScoreOptionWrapper = styled.div`
+  display: ${(props) => (props.isEditMode === true ? "flex" : "none")};
+  align-items: left;
+  padding: 5px 10px;
+  flex-direction: column;
+`;
+export const InputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 10px;
+`;
+
 export const NumberInput = styled.input`
   font-family: ${textFontFamily};
   font-size: ${textFontSize};
@@ -116,7 +141,11 @@ export const NumberInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: 76px;
+  width: 86px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const DropDownList = styled.select`
@@ -127,6 +156,11 @@ export const DropDownList = styled.select`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
+  width: 120px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const DropDownItem = styled.option``;
@@ -136,6 +170,21 @@ export const SettingsWrapper = styled.div`
   margin-top: ${sectionMargin};
   padding: 10px 0;
   width: 100%;
+`;
+
+export const ScoreNameInput = styled.input`
+  font-family: ${textFontFamily};
+  font-size: ${textFontSize};
+  background-color: ${inputColor};
+  color: ${inputTextColor};
+  border: ${inputBorder};
+  border-radius: ${inputRadius};
+  padding: ${inputPadding};
+  width: 45px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 // Source: https://codesandbox.io/s/custom-checkbox-and-radiobutton-with-react-and-styled-components-6h3st?from-embed=&file=/src/ToggleSwitch.js

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import {
   textFontSize,
+  textFontSize2,
   textColor,
   backgroundColor1,
   backgroundColor2,
@@ -41,6 +42,10 @@ export const NameWrapper = styled.td`
   overflow-wrap: anywhere;
   text-align: left;
   padding: 10px 0 10px 10px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const ScoreWrapper = styled.td`
@@ -55,5 +60,9 @@ export const ScoreWrapper = styled.td`
 
   :nth-child(2n) {
     background-color: ${backgroundColor2};
+  }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
   }
 `;

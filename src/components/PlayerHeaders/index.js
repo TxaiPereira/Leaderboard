@@ -8,9 +8,8 @@ import {
   ScoreNameText,
 } from "./styles";
 
-function PlayerHeaders({ amountOfScores, hasTeams }) {
+function PlayerHeaders({ amountOfScores, hasTeams, scoreNames }) {
   let nameText = hasTeams === false ? "Players" : "Teams";
-  const scoreNames = ["Score1", "Score2", "Score3", "Score4"];
 
   return (
     <PlayerHeaderWrapper>

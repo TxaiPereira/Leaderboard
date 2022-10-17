@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import PlayerHeaders from "./components/PlayerHeaders";
 import Teams from "./components/Teams";
 import {
@@ -11,6 +11,8 @@ import {
   SliderLabel,
   Slider,
   OptionWrapper,
+  ScoreOptionWrapper,
+  InputWrapper,
   Label,
   NumberInput,
   SettingsWrapper,
@@ -18,6 +20,7 @@ import {
   NewPlayerInputWrapper,
   DropDownList,
   DropDownItem,
+  ScoreNameInput,
 } from "./styles";
 
 import {
@@ -52,19 +55,17 @@ function App() {
   const [amountOfScores, changeAmountOfScore] = useState(1);
   const [isTeamsEnabled, toggleTeams] = useState(true);
   const [isPlayerPopupVisible, setPlayerPopupVisible] = useState(false);
+  const [sortedBy, setSortedBy] = useState(0);
 
   const newPlayerObj = {
     name: newPlayerName,
     team: newTeamName,
     placement: "",
-    score1: 0,
-    score2: 0,
-    score3: 0,
-    score4: 0,
+    scores: [0, 0, 0, 0],
   };
+  const [scoreNames, setScoreNames] = useState(["A", "B", "C", "D"]);
 
   const [selectedPlayer, setSelectedPlayer] = useState(newPlayerObj);
-  const [sortedBy, setSortedBy] = useState("score1");
 
   // Adds new player with given name
   const addPlayer = () => {
@@ -76,15 +77,7 @@ function App() {
 
   // Increases given player score by 1
   const increaseScoreHandler = (player, scoreIndex) => {
-    if (scoreIndex === 1) {
-      player.score1 = player.score1 + 1;
-    } else if (scoreIndex === 2) {
-      player.score2 = player.score2 + 1;
-    } else if (scoreIndex === 3) {
-      player.score3 = player.score3 + 1;
-    } else if (scoreIndex === 4) {
-      player.score4 = player.score4 + 1;
-    }
+    player.scores[scoreIndex] = player.scores[scoreIndex] + 1;
 
     const index = players.findIndex((p) => p.name === player.name);
 
@@ -95,15 +88,7 @@ function App() {
 
   // Decreases given player score by 1
   const decreaseScoreHandler = (player, scoreIndex) => {
-    if (scoreIndex === 1) {
-      player.score1 = player.score1 - 1;
-    } else if (scoreIndex === 2) {
-      player.score2 = player.score2 - 1;
-    } else if (scoreIndex === 3) {
-      player.score3 = player.score3 - 1;
-    } else if (scoreIndex === 4) {
-      player.score4 = player.score4 - 1;
-    }
+    player.scores[scoreIndex] = player.scores[scoreIndex] - 1;
 
     const index = players.findIndex((p) => p.name === player.name);
 
@@ -115,57 +100,73 @@ function App() {
   // Deletes given player
   const deletePlayer = (player) => {
     const newPlayers = players.filter((p) => p !== player);
-    placePlayers(newPlayers);
     setPlayerPopupVisible(false);
+    setPlayers(newPlayers);
   };
 
   // Gives players a placement based on their score1
   const placePlayers = (players) => {
-    const highestScore = Math.max(...players.map((p) => p.score1));
+    players = sortPlayers(players);
 
-    const noFirstPlayers = players.filter((p) => p.score1 !== highestScore);
-    const secondHighestScore = Math.max(...noFirstPlayers.map((p) => p.score1));
+    const highestScore = Math.max(...players.map((p) => p.scores[sortedBy]));
+
+    const noFirstPlayers = players.filter(
+      (p) => p.scores[sortedBy] !== highestScore
+    );
+    const secondHighestScore = Math.max(
+      ...noFirstPlayers.map((p) => p.scores[sortedBy])
+    );
 
     const noSecondPlayers = noFirstPlayers.filter(
-      (p) => p.score1 !== secondHighestScore
+      (p) => p.scores[sortedBy] !== secondHighestScore
     );
-    const thirdHighestScore = Math.max(...noSecondPlayers.map((p) => p.score1));
+    const thirdHighestScore = Math.max(
+      ...noSecondPlayers.map((p) => p.scores[sortedBy])
+    );
 
     players.forEach((player) => {
-      if (player.score1 === highestScore) {
+      if (player.scores[sortedBy] === highestScore) {
         player.placement = "🥇";
-      } else if (player.score1 === secondHighestScore) {
+      } else if (player.scores[sortedBy] === secondHighestScore) {
         player.placement = "🥈";
-      } else if (player.score1 === thirdHighestScore) {
+      } else if (player.scores[sortedBy] === thirdHighestScore) {
         player.placement = "🥉";
       } else {
         player.placement = "";
       }
     });
 
-    players = sortPlayers(players);
-
     setPlayers(players);
+  };
+
+  const sortedByHandler = (sortedBy) => {
+    setSortedBy(sortedBy);
   };
 
   // Sorts players by selected score
   const sortPlayers = (players) => {
-    if (sortedBy === "score1") {
-      players.sort((a, b) => (a.score1 < b.score1 ? 1 : -1));
-    } else if (sortedBy === "score2") {
-      players.sort((a, b) => (a.score2 < b.score2 ? 1 : -1));
-    } else if (sortedBy === "score3") {
-      players.sort((a, b) => (a.score3 < b.score3 ? 1 : -1));
-    } else if (sortedBy === "score4") {
-      players.sort((a, b) => (a.score4 < b.score4 ? 1 : -1));
-    }
+    players.sort((a, b) => (a.scores[sortedBy] < b.scores[sortedBy] ? 1 : -1));
     return players;
   };
+
+  useMemo(() => {
+    sortPlayers(players);
+    sortedByHandler(sortedBy);
+  }, [players, sortedBy]);
 
   // Shows player popup
   const popupPlayer = (player) => {
     setSelectedPlayer(player);
     setPlayerPopupVisible(true);
+  };
+
+  // Change score name
+  const editScoreName = (newScoreName, index) => {
+    if (newScoreName.length !== 0) {
+      const newScoreNames = [...scoreNames];
+      newScoreNames[index] = newScoreName;
+      setScoreNames(newScoreNames);
+    }
   };
 
   return (
@@ -177,7 +178,20 @@ function App() {
           </H1>
           <PopupScoreWrapper color={2}>
             <PopupScoreText>
-              {"Score1: "} {selectedPlayer.score1}
+              {scoreNames[0] + ": "} {selectedPlayer.scores[0]}
+            </PopupScoreText>
+            <ButtonsWrapper>
+              <MinusButton
+                onClick={() => decreaseScoreHandler(selectedPlayer, 0)}
+              />
+              <PlusButton
+                onClick={() => increaseScoreHandler(selectedPlayer, 0)}
+              />
+            </ButtonsWrapper>
+          </PopupScoreWrapper>
+          <PopupScoreWrapper color={1}>
+            <PopupScoreText>
+              {scoreNames[1] + ": "} {selectedPlayer.scores[1]}
             </PopupScoreText>
             <ButtonsWrapper>
               <MinusButton
@@ -188,9 +202,9 @@ function App() {
               />
             </ButtonsWrapper>
           </PopupScoreWrapper>
-          <PopupScoreWrapper color={1}>
+          <PopupScoreWrapper color={2}>
             <PopupScoreText>
-              {"Score2: "} {selectedPlayer.score2}
+              {scoreNames[2] + ": "} {selectedPlayer.scores[2]}
             </PopupScoreText>
             <ButtonsWrapper>
               <MinusButton
@@ -201,9 +215,9 @@ function App() {
               />
             </ButtonsWrapper>
           </PopupScoreWrapper>
-          <PopupScoreWrapper color={2}>
+          <PopupScoreWrapper color={1}>
             <PopupScoreText>
-              {"Score3: "} {selectedPlayer.score3}
+              {scoreNames[3] + ": "} {selectedPlayer.scores[3]}
             </PopupScoreText>
             <ButtonsWrapper>
               <MinusButton
@@ -211,19 +225,6 @@ function App() {
               />
               <PlusButton
                 onClick={() => increaseScoreHandler(selectedPlayer, 3)}
-              />
-            </ButtonsWrapper>
-          </PopupScoreWrapper>
-          <PopupScoreWrapper color={1}>
-            <PopupScoreText>
-              {"Score4: "} {selectedPlayer.score4}
-            </PopupScoreText>
-            <ButtonsWrapper>
-              <MinusButton
-                onClick={() => decreaseScoreHandler(selectedPlayer, 4)}
-              />
-              <PlusButton
-                onClick={() => increaseScoreHandler(selectedPlayer, 4)}
               />
             </ButtonsWrapper>
           </PopupScoreWrapper>
@@ -241,10 +242,15 @@ function App() {
         isTeamsEnabled={isTeamsEnabled}
         amountOfScores={amountOfScores}
         editmode={isEditMode}
+        scoreNames={scoreNames}
       />
 
       <PlayerList>
-        <PlayerHeaders amountOfScores={amountOfScores} hasTeams={false} />
+        <PlayerHeaders
+          amountOfScores={amountOfScores}
+          hasTeams={false}
+          scoreNames={scoreNames}
+        />
         <tbody>
           {players.map((player, index) => (
             <PlayerItem
@@ -257,21 +263,21 @@ function App() {
               </NameWrapper>
 
               <ScoreWrapper color={2}>
-                <ScoreText>{player.score1}</ScoreText>
+                <ScoreText>{player.scores[0]}</ScoreText>
               </ScoreWrapper>
               {amountOfScores >= 2 && (
                 <ScoreWrapper color={1}>
-                  <ScoreText>{player.score2}</ScoreText>
+                  <ScoreText>{player.scores[1]}</ScoreText>
                 </ScoreWrapper>
               )}
               {amountOfScores >= 3 && (
                 <ScoreWrapper color={2}>
-                  <ScoreText>{player.score3}</ScoreText>
+                  <ScoreText>{player.scores[2]}</ScoreText>
                 </ScoreWrapper>
               )}
               {amountOfScores >= 4 && (
                 <ScoreWrapper color={1}>
-                  <ScoreText>{player.score4}</ScoreText>
+                  <ScoreText>{player.scores[3]}</ScoreText>
                 </ScoreWrapper>
               )}
             </PlayerItem>
@@ -352,16 +358,41 @@ function App() {
           <Label>Sort by</Label>
           <DropDownList
             onChange={(e) => {
-              setSortedBy(e.target.value);
+              sortedByHandler(e.target.value);
               placePlayers(players);
             }}
           >
-            <DropDownItem value="score1">Score1</DropDownItem>
-            <DropDownItem value="score2">Score2</DropDownItem>
-            <DropDownItem value="score3">Score3</DropDownItem>
-            <DropDownItem value="score4">Score4</DropDownItem>
+            <DropDownItem value="0">{scoreNames[0]}</DropDownItem>
+            <DropDownItem value="1">{scoreNames[1]}</DropDownItem>
+            <DropDownItem value="2">{scoreNames[2]}</DropDownItem>
+            <DropDownItem value="3">{scoreNames[3]}</DropDownItem>
           </DropDownList>
         </OptionWrapper>
+        <ScoreOptionWrapper isEditMode={isEditMode}>
+          <Label>Score Names </Label>
+          <InputWrapper>
+            <ScoreNameInput
+              placeholder="A"
+              onChange={(e) => editScoreName(e.target.value, 0)}
+              maxLength={3}
+            />
+            <ScoreNameInput
+              placeholder="B"
+              onChange={(e) => editScoreName(e.target.value, 1)}
+              maxLength={3}
+            />
+            <ScoreNameInput
+              placeholder="C"
+              onChange={(e) => editScoreName(e.target.value, 2)}
+              maxLength={3}
+            />
+            <ScoreNameInput
+              placeholder="D"
+              onChange={(e) => editScoreName(e.target.value, 3)}
+              maxLength={3}
+            />
+          </InputWrapper>
+        </ScoreOptionWrapper>
       </SettingsWrapper>
     </Body>
   );

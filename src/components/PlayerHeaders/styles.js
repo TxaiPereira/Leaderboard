@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {
   inputRadius,
   textFontSize,
+  textFontSize2,
   textFontFamily,
   barBackgroundColor1,
   barBackgroundColor2,
@@ -43,6 +44,10 @@ export const NameHeaderInput = styled.input`
   padding: ${inputPadding};
   min-width: 100%;
   margin: 0 10px;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const NameHeaderText = styled.label`
@@ -52,6 +57,10 @@ export const NameHeaderText = styled.label`
   font-weight: bold;
   max-width: 270px;
   width: 100%;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const ScoreNameWrapper = styled.th`
@@ -61,18 +70,6 @@ export const ScoreNameWrapper = styled.th`
   width: 25%;
 `;
 
-export const ScoreNameInput = styled.input`
-  font-family: ${textFontFamily};
-  font-size: ${textFontSize};
-  background-color: ${barInputColor};
-  color: ${barInputTextColor};
-  border: none;
-  border-radius: ${inputRadius};
-  padding: ${inputPadding};
-  width: 128px;
-  margin: 10px;
-`;
-
 export const ScoreNameText = styled.label`
   font-size: ${textFontSize};
   color: ${barTextColor};
@@ -80,4 +77,8 @@ export const ScoreNameText = styled.label`
   font-weight: bold;
   text-align: center;
   margin: auto;
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;

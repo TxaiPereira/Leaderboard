@@ -1,6 +1,6 @@
 {
-  "name": "scoreboard",
-  "description": "Scoreboard that keeps track of 1-4 scores per player and team.",
+  "name": "leaderboard",
+  "description": "Leaderboard that keeps track of 1-4 scores per player and team.",
   "version": "1.0.0",
   "license": "MIT",
   "author": "Txai Pereira de Lacerda",
