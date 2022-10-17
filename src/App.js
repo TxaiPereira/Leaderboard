@@ -51,7 +51,7 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [newPlayerName, setNewPlayerName] = useState("");
   const [newTeamName, setTeamName] = useState("Team 1");
-  const [isEditMode, toggleEditMode] = useState(true);
+  const [isEditMode, toggleEditMode] = useState(false);
   const [amountOfScores, changeAmountOfScore] = useState(1);
   const [isTeamsEnabled, toggleTeams] = useState(true);
   const [isPlayerPopupVisible, setPlayerPopupVisible] = useState(false);

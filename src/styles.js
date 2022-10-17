@@ -125,12 +125,38 @@ export const ScoreOptionWrapper = styled.div`
   align-items: left;
   padding: 5px 10px;
   flex-direction: column;
+
+  @media only screen and (min-width: 560px) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
+
 export const InputWrapper = styled.div`
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  margin-top: 10px;
+`;
+
+export const ScoreNameInput = styled.input`
+  font-family: ${textFontFamily};
+  font-size: ${textFontSize};
+  background-color: ${inputColor};
+  color: ${inputTextColor};
+  border: ${inputBorder};
+  border-radius: ${inputRadius};
+  padding: ${inputPadding};
+  width: 13%;
+
+  @media only screen and (min-width: 560px) {
+    width: 53px;
+    margin-left: 10px;
+  }
+
+  @media only screen and (max-width: 430px) {
+    font-size: ${textFontSize2};
+  }
 `;
 
 export const NumberInput = styled.input`
@@ -170,21 +196,6 @@ export const SettingsWrapper = styled.div`
   margin-top: ${sectionMargin};
   padding: 10px 0;
   width: 100%;
-`;
-
-export const ScoreNameInput = styled.input`
-  font-family: ${textFontFamily};
-  font-size: ${textFontSize};
-  background-color: ${inputColor};
-  color: ${inputTextColor};
-  border: ${inputBorder};
-  border-radius: ${inputRadius};
-  padding: ${inputPadding};
-  width: 45px;
-
-  @media only screen and (max-width: 430px) {
-    font-size: ${textFontSize2};
-  }
 `;
 
 // Source: https://codesandbox.io/s/custom-checkbox-and-radiobutton-with-react-and-styled-components-6h3st?from-embed=&file=/src/ToggleSwitch.js
