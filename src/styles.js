@@ -21,9 +21,6 @@ import {
   inputPadding,
   buttonSize,
   sectionMargin,
-  settingsWrapperPadding,
-  optionWrapperPadding,
-  numberInputWidth,
 } from "./colors";
 
 import AddPlayerImg from "./assets/add_player.svg";
@@ -33,12 +30,13 @@ export const Body = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 
   width: 100%;
   margin: 0;
   @media only screen and (min-width: 992px) {
     margin: 0 auto;
-    width: 45%;
+    width: 60%;
   }
 `;
 
@@ -61,12 +59,12 @@ export const NewPlayerInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: ${(props) => (props.teamsEnabled === true ? "45%" : "100%")};
+  width: ${(props) => (props.teamsEnabled === true ? "46%" : "100%")};
   margin-right: 10px;
 `;
 
 export const NewTeamInput = styled.input`
-  display: ${(props) => (props.visibility === true ? "block" : "none")};
+  display: ${(props) => (props.isTeamsEnabled === true ? "block" : "none")};
   font-family: ${textFontFamily};
   font-size: ${textFontSize};
   background-color: ${inputColor};
@@ -74,11 +72,12 @@ export const NewTeamInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: 45%;
+  width: 46%;
   margin-right: 10px;
 `;
 
 export const AddPlayerButton = styled.button`
+  cursor: pointer;
   font-size: ${textFontSize};
   border: none;
   color: ${primaryButtonTextColor};
@@ -102,9 +101,9 @@ export const Label = styled.label`
 `;
 
 export const OptionWrapper = styled.div`
-  display: ${(props) => (props.visibility === true ? "flex" : "none")};
+  display: ${(props) => (props.isEditMode === true ? "flex" : "none")};
   align-items: center;
-  padding: ${optionWrapperPadding};
+  padding: 5px 0;
   justify-content: space-between;
   padding: 5px 10px;
 `;
@@ -117,7 +116,7 @@ export const NumberInput = styled.input`
   border: ${inputBorder};
   border-radius: ${inputRadius};
   padding: ${inputPadding};
-  width: ${numberInputWidth};
+  width: 76px;
 `;
 
 export const DropDownList = styled.select`
@@ -135,7 +134,7 @@ export const DropDownItem = styled.option``;
 export const SettingsWrapper = styled.div`
   background-color: ${backgroundColor1};
   margin-top: ${sectionMargin};
-  padding: ${settingsWrapperPadding};
+  padding: 10px 0;
   width: 100%;
 `;
 
@@ -164,7 +163,7 @@ export const Slider = styled.span`
   right: 0;
   bottom: 0;
   background-color: ${(props) =>
-    props.visibility === true
+    props.isEditMode === true
       ? sliderEnabledBackgroundColor
       : sliderDisbledBackgroundColor};
   -webkit-transition: 0.4s;
@@ -179,11 +178,11 @@ export const Slider = styled.span`
     left: 0.4em;
     bottom: 0.4em;
     background-color: ${(props) =>
-      props.visibility === true ? sliderEnabledColor : sliderDisabledColor};
+      props.isEditMode === true ? sliderEnabledColor : sliderDisabledColor};
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50%;
     transform: ${(props) =>
-      props.visibility === true ? "translateX(2.6em);" : ""};
+      props.isEditMode === true ? "translateX(2.6em);" : ""};
   }
 `;

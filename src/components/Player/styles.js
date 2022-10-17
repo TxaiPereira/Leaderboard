@@ -17,9 +17,9 @@ import {
   playerHover,
   secondaryButtonBorder,
   buttonSize,
-  nameTextMargin,
-  scoreTextWidth,
   shadowColor,
+  nameWrapperWidth,
+  sectionMargin,
 } from "../../colors";
 
 import PlusImg from "./assets/plus.svg";
@@ -34,9 +34,10 @@ export const PlayerList = styled.table`
   border-collapse: collapse;
   border-top-width: 0px;
   border-top-style: none;
+  margin-top: ${sectionMargin};
 `;
 
-export const EmptyMessageWrapper = styled.tr`
+export const EmptyMessageWrapper = styled.div`
   background-color: ${backgroundColor1};
   color: ${textColor};
   text-align: center;
@@ -64,9 +65,9 @@ export const MessageImg = styled.div`
   border: none;
 `;
 
-export const PlayerItem = styled.tr``;
-
-export const PlayerButton = styled.button`
+export const PlayerItem = styled.tr`
+  cursor: pointer;
+  cursor: pointer;
   padding: 0;
   font-family: ${textFontFamily};
   font-size: ${textFontSize};
@@ -75,44 +76,39 @@ export const PlayerButton = styled.button`
   background-color: ${backgroundColor1};
   justify-content: space-between;
   flex-direction: reverse-row;
+  width: 100%;
+  min-height: 60px;
+
   :hover {
     background-color: ${playerHover};
   }
-  width: 100%;
-  height: 60px;
 `;
 
 export const NameWrapper = styled.td`
   display: flex;
   align-items: center;
-  width: 40%;
-`;
-
-export const NameText = styled.p`
+  width: ${nameWrapperWidth};
   font-size: ${textFontSize};
   font-weight: 500;
   color: ${textColor};
-  margin-left: ${nameTextMargin};
   overflow-wrap: anywhere;
   text-align: left;
-`;
-
-export const ScoresWrapper = styled.div`
-  display: flex;
-  width: 60%;
-  justify-content: flex-end;
+  padding: 10px 0 10px 10px;
 `;
 
 export const ScoreWrapper = styled.td`
-  background-color: ${(props) =>
-    props.color === 1 ? backgroundColor1 : backgroundColor2};
   display: flex;
   justify-content: center;
   align-items: center;
   width: 25%;
+
+  :nth-child(2n) {
+    background-color: ${backgroundColor2};
+  }
 `;
 
 export const MinusButton = styled.button`
+  cursor: pointer;
   display: block;
   font-size: ${textFontSize};
   font-weight: bold;
@@ -134,6 +130,7 @@ export const MinusButton = styled.button`
 `;
 
 export const PlusButton = styled.button`
+  cursor: pointer;
   display: block;
   font-size: ${textFontSize};
   font-weight: bold;
@@ -156,12 +153,13 @@ export const ScoreText = styled.p`
   font-size: ${textFontSize};
   color: ${textColor};
   text-align: center;
-  width: ${scoreTextWidth};
+  width: 40px;
 `;
 
 export const PlayerPopUpWrapper = styled.div`
   position: absolute;
-  display: ${(props) => (props.visibility === true ? "flex" : "none")};
+  display: ${(props) =>
+    props.isPlayerPopupVisible === true ? "flex" : "none"};
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -192,7 +190,7 @@ export const PlayerPopUp = styled.div`
   border-radius: 20px;
   box-shadow: 0 0 10px ${shadowColor};
   animation: ${(props) =>
-    props.visibility &&
+    props.isPlayerPopupVisible &&
     css`
       ${slideInTop} 0.3s ease-in
     `};
@@ -217,6 +215,7 @@ export const TeamName = styled.span`
 `;
 
 export const SaveButton = styled.button`
+  cursor: pointer;
   font-size: ${textFontSize};
   font-family: ${textFontFamily};
   font-weight: 500;
@@ -234,6 +233,7 @@ export const SaveButton = styled.button`
 `;
 
 export const DeleteButton = styled.button`
+  cursor: pointer;
   display: block;
   font-size: ${textFontSize};
   font-weight: bold;

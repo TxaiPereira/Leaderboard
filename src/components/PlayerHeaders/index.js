@@ -1,41 +1,25 @@
 import React, { useState } from "react";
 import {
   PlayerHeaderWrapper,
+  PlayerHeaderRow,
   NameHeaderWrapper,
   NameHeaderText,
   ScoreNameWrapper,
   ScoreNameText,
-  ScoreNamesWrapper,
 } from "./styles";
 
-function PlayerHeaders({ visibility, amountOfScores }) {
-  const [scoreNames, setScoreNames] = useState([
-    "Score1",
-    "Score2",
-    "Score3",
-    "Score4",
-  ]);
-  let [nameText, setNameText] = useState("Players");
-
-  // Changes the name of one of the scores that are being tracked
-  const changeScoreName = (newScoreName, index) => {
-    const newScoreNames = [...scoreNames];
-    newScoreNames[index] = newScoreName;
-    setScoreNames(newScoreNames);
-  };
+function PlayerHeaders({ amountOfScores, hasTeams }) {
+  let nameText = hasTeams === false ? "Players" : "Teams";
+  const scoreNames = ["Score1", "Score2", "Score3", "Score4"];
 
   return (
     <PlayerHeaderWrapper>
-      <NameHeaderWrapper>
-        <NameHeaderText>{nameText}</NameHeaderText>
-      </NameHeaderWrapper>
+      <PlayerHeaderRow>
+        <NameHeaderWrapper>
+          <NameHeaderText>{nameText}</NameHeaderText>
+        </NameHeaderWrapper>
 
-      <ScoreNamesWrapper>
-        <ScoreNameWrapper
-          color={2}
-          editmode={visibility}
-          amountOfScores={amountOfScores}
-        >
+        <ScoreNameWrapper color={2} amountOfScores={amountOfScores}>
           <ScoreNameText>{scoreNames[0]}</ScoreNameText>
         </ScoreNameWrapper>
 
@@ -54,7 +38,7 @@ function PlayerHeaders({ visibility, amountOfScores }) {
             <ScoreNameText>{scoreNames[3]}</ScoreNameText>
           </ScoreNameWrapper>
         )}
-      </ScoreNamesWrapper>
+      </PlayerHeaderRow>
     </PlayerHeaderWrapper>
   );
 }

@@ -3,13 +3,12 @@ import {
   TeamList,
   TeamWrapper,
   NameWrapper,
-  NameText,
   ScoreWrapper,
   ScoreText,
-  ScoresWrapper,
 } from "./styles";
+import PlayerHeaders from "../PlayerHeaders";
 
-function Teams({ players, isTeamsEnabled, amountOfScores, editmode }) {
+function Teams({ players, isTeamsEnabled, amountOfScores }) {
   const [teams, setTeams] = useState([]);
 
   const countTeamScores = () => {
@@ -45,36 +44,27 @@ function Teams({ players, isTeamsEnabled, amountOfScores, editmode }) {
   }, [JSON.stringify(players)]);
 
   return (
-    <TeamList>
-      {teams
-        .sort((a, b) => (a.score1 < b.score1 ? 1 : -1))
-        .map((team, index) => (
-          <TeamWrapper visibility={isTeamsEnabled}>
-            <NameWrapper>
-              <NameText editmode={editmode}>{team.name}</NameText>
-            </NameWrapper>
-            <ScoresWrapper>
-              <ScoreWrapper color={2}>
-                <ScoreText editmode={false}>{team.score1}</ScoreText>
-              </ScoreWrapper>
+    <TeamList isTeamsEnabled={isTeamsEnabled}>
+      <PlayerHeaders amountOfScores={amountOfScores} hasTeams={true} />
+      <tbody>
+        {teams
+          .sort((a, b) => (a.score1 < b.score1 ? 1 : -1))
+          .map((team, index) => (
+            <TeamWrapper key={team.name}>
+              <NameWrapper>{team.name}</NameWrapper>
+              <ScoreWrapper color={2}>{team.score1}</ScoreWrapper>
               {amountOfScores >= 2 && (
-                <ScoreWrapper color={1}>
-                  <ScoreText editmode={false}>{team.score2}</ScoreText>
-                </ScoreWrapper>
+                <ScoreWrapper color={1}>{team.score2}</ScoreWrapper>
               )}
               {amountOfScores >= 3 && (
-                <ScoreWrapper color={2}>
-                  <ScoreText editmode={false}>{team.score3}</ScoreText>
-                </ScoreWrapper>
+                <ScoreWrapper color={2}>{team.score3}</ScoreWrapper>
               )}
               {amountOfScores >= 4 && (
-                <ScoreWrapper color={1}>
-                  <ScoreText editmode={false}>{team.score4}</ScoreText>
-                </ScoreWrapper>
+                <ScoreWrapper color={1}>{team.score4}</ScoreWrapper>
               )}
-            </ScoresWrapper>
-          </TeamWrapper>
-        ))}
+            </TeamWrapper>
+          ))}
+      </tbody>
     </TeamList>
   );
 }

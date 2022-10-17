@@ -16,10 +16,7 @@ export const textFontSize = "0.9em";
 export const textFontFamily = "Montserrat";
 export const playerHover = darkGrey;
 
-export const nameWrapperWidth = "20%";
-export const nameTextMargin = "10px";
-export const nameTextWidth = "270px";
-export const scorePadding = "10px 0";
+export const nameWrapperWidth = "60%";
 
 export const buttonRadius = "5px";
 export const buttonSize = "60px";
@@ -44,18 +41,10 @@ export const inputTextColor = white;
 export const inputBorder = "2px solid " + white;
 export const inputRadius = "5px";
 export const inputPadding = "20px 15px";
-export const barInputWidth = "128px";
 export const barInputColor = lightPurple;
 export const barInputTextColor = white;
-export const barInputMargin = "10px";
 export const barTextColor = white;
-export const barHeight = "60px";
-export const scoreTextWidth = "40px";
-export const nameHeaderInputWidth = "100%";
 
 export const sectionMargin = "20px";
-export const settingsWrapperPadding = "10px 0";
-export const optionWrapperPadding = "5px 0";
-export const numberInputWidth = "76px";
 
 export const shadowColor = "#999";

@@ -27,15 +27,12 @@ import {
   EmptyMessage1,
   MessageImg,
   PlayerItem,
-  PlayerButton,
   NameWrapper,
   DeleteButton,
-  NameText,
   ScoreWrapper,
   MinusButton,
   ScoreText,
   PlusButton,
-  ScoresWrapper,
   PlayerPopUpWrapper,
   SaveButton,
   PlayerPopUp,
@@ -173,8 +170,8 @@ function App() {
 
   return (
     <Body>
-      <PlayerPopUpWrapper visibility={isPlayerPopupVisible}>
-        <PlayerPopUp visibility={isPlayerPopupVisible}>
+      <PlayerPopUpWrapper isPlayerPopupVisible={isPlayerPopupVisible}>
+        <PlayerPopUp isPlayerPopupVisible={isPlayerPopupVisible}>
           <H1>
             {selectedPlayer.name} <TeamName>({selectedPlayer.team})</TeamName>
           </H1>
@@ -247,50 +244,48 @@ function App() {
       />
 
       <PlayerList>
-        <PlayerHeaders
-          visibility={isEditMode}
-          amountOfScores={amountOfScores}
-        />
-        {players.length === 0 && (
-          <EmptyMessageWrapper>
-            <MessageImg />
-            <EmptyMessage1>No players yet!</EmptyMessage1>
-            <EmptyMessage2>Add players to fill this list.</EmptyMessage2>
-          </EmptyMessageWrapper>
-        )}
-        {players.map((player, index) => (
-          <PlayerItem>
-            <PlayerButton onClick={() => popupPlayer(player, index)}>
+        <PlayerHeaders amountOfScores={amountOfScores} hasTeams={false} />
+        <tbody>
+          {players.map((player, index) => (
+            <PlayerItem
+              key={player.name}
+              onClick={() => popupPlayer(player, index)}
+            >
               <NameWrapper>
-                <NameText>
-                  {player.placement} {player.name}
-                  {isTeamsEnabled === true && " (" + player.team + ")"}
-                </NameText>
+                {player.placement} {player.name}
+                {isTeamsEnabled === true && " (" + player.team + ")"}
               </NameWrapper>
-              <ScoresWrapper>
-                <ScoreWrapper color={2}>
-                  <ScoreText>{player.score1}</ScoreText>
+
+              <ScoreWrapper color={2}>
+                <ScoreText>{player.score1}</ScoreText>
+              </ScoreWrapper>
+              {amountOfScores >= 2 && (
+                <ScoreWrapper color={1}>
+                  <ScoreText>{player.score2}</ScoreText>
                 </ScoreWrapper>
-                {amountOfScores >= 2 && (
-                  <ScoreWrapper color={1}>
-                    <ScoreText>{player.score2}</ScoreText>
-                  </ScoreWrapper>
-                )}
-                {amountOfScores >= 3 && (
-                  <ScoreWrapper color={2}>
-                    <ScoreText>{player.score3}</ScoreText>
-                  </ScoreWrapper>
-                )}
-                {amountOfScores >= 4 && (
-                  <ScoreWrapper color={1}>
-                    <ScoreText>{player.score4}</ScoreText>
-                  </ScoreWrapper>
-                )}
-              </ScoresWrapper>
-            </PlayerButton>
-          </PlayerItem>
-        ))}
+              )}
+              {amountOfScores >= 3 && (
+                <ScoreWrapper color={2}>
+                  <ScoreText>{player.score3}</ScoreText>
+                </ScoreWrapper>
+              )}
+              {amountOfScores >= 4 && (
+                <ScoreWrapper color={1}>
+                  <ScoreText>{player.score4}</ScoreText>
+                </ScoreWrapper>
+              )}
+            </PlayerItem>
+          ))}
+        </tbody>
       </PlayerList>
+
+      {players.length === 0 && (
+        <EmptyMessageWrapper>
+          <MessageImg />
+          <EmptyMessage1>No players yet!</EmptyMessage1>
+          <EmptyMessage2>Add players to fill this list.</EmptyMessage2>
+        </EmptyMessageWrapper>
+      )}
 
       <SettingsWrapper editMode={isEditMode}>
         <NewPlayerWrapper>
@@ -306,7 +301,7 @@ function App() {
               teamsEnabled={isTeamsEnabled}
             />
             <NewTeamInput
-              visibility={isTeamsEnabled}
+              isTeamsEnabled={isTeamsEnabled}
               maxLength={12}
               type="text"
               value={newTeamName}
@@ -319,7 +314,7 @@ function App() {
           <AddPlayerButton onClick={addPlayer} />
         </NewPlayerWrapper>
 
-        <OptionWrapper visibility={true}>
+        <OptionWrapper isEditMode={true}>
           <Label>Edit Mode</Label>
           <SliderLabel>
             <SliderCheckbox
@@ -327,10 +322,10 @@ function App() {
               checked={isEditMode}
               onChange={() => toggleEditMode(!isEditMode)}
             />
-            <Slider visibility={isEditMode} />
+            <Slider isEditMode={isEditMode} />
           </SliderLabel>
         </OptionWrapper>
-        <OptionWrapper visibility={isEditMode}>
+        <OptionWrapper isEditMode={isEditMode}>
           <Label>Teams</Label>
           <SliderLabel>
             <SliderCheckbox
@@ -338,11 +333,11 @@ function App() {
               checked={isTeamsEnabled}
               onChange={() => toggleTeams(!isTeamsEnabled)}
             />
-            <Slider visibility={isTeamsEnabled} />
+            <Slider isEditMode={isTeamsEnabled} />
           </SliderLabel>
         </OptionWrapper>
 
-        <OptionWrapper visibility={isEditMode}>
+        <OptionWrapper isEditMode={isEditMode}>
           <Label>Amount of Scores</Label>
           <NumberInput
             onChange={(e) => changeAmountOfScore(e.target.value)}
@@ -353,7 +348,7 @@ function App() {
           />
         </OptionWrapper>
 
-        <OptionWrapper visibility={isEditMode}>
+        <OptionWrapper isEditMode={isEditMode}>
           <Label>Sort by</Label>
           <DropDownList
             onChange={(e) => {
