@@ -137,6 +137,10 @@ export const InputWrapper = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+
+  @media only screen and (min-width: 560px) {
+    margin-top: 0;
+  }
 `;
 
 export const ScoreNameInput = styled.input`

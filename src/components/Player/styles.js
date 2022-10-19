@@ -82,6 +82,10 @@ export const PlayerItem = styled.tr`
 
   :hover {
     background-color: ${playerHover};
+
+    td {
+      background-color: ${playerHover};
+    }
   }
 
   @media only screen and (max-width: 430px) {

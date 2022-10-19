@@ -1,7 +1,11 @@
 const white = "#fff";
 const black = "#000";
-const grey = "#111";
-const darkGrey = "#080808";
+
+const grey = "#212121";
+const lightGrey = "#4c4c4c";
+const darkGrey = "#181818";
+const darkerGrey = "#121212";
+
 const purple = "#6202ee";
 const darkPurple = "#4b01d1";
 const lightPurple = "#9453f3";
@@ -15,7 +19,7 @@ export const textColor = white;
 export const textFontSize2 = "0.9em";
 export const textFontSize = "1em";
 export const textFontFamily = "Montserrat";
-export const playerHover = darkGrey;
+export const playerHover = lightGrey;
 
 export const nameWrapperWidth = "60%";
 
@@ -37,7 +41,7 @@ export const secondaryTextHoverColor = black;
 export const secondaryButtonBorder = "2px solid " + white;
 export const secondaryBackgroundColor = "transparent";
 
-export const inputColor = black;
+export const inputColor = darkerGrey;
 export const inputTextColor = white;
 export const inputBorder = "2px solid " + white;
 export const inputRadius = "5px";

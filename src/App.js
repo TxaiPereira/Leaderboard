@@ -321,7 +321,7 @@ function App() {
         </NewPlayerWrapper>
 
         <OptionWrapper isEditMode={true}>
-          <Label>Edit Mode</Label>
+          <Label>Toggle Edit Mode</Label>
           <SliderLabel>
             <SliderCheckbox
               type="checkbox"
@@ -332,7 +332,7 @@ function App() {
           </SliderLabel>
         </OptionWrapper>
         <OptionWrapper isEditMode={isEditMode}>
-          <Label>Teams</Label>
+          <Label>Toggle Teams</Label>
           <SliderLabel>
             <SliderCheckbox
               type="checkbox"
