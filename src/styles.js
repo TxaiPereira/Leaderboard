@@ -26,7 +26,7 @@ import {
 
 import AddPlayerImg from "./assets/add_player.svg";
 
-export const Body = styled.div`
+export const Main = styled.main`
   background-color: ${bodyColor1};
   height: 100vh;
   display: flex;

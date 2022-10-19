@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import PlayerHeaders from "./components/PlayerHeaders";
 import Teams from "./components/Teams";
 import {
-  Body,
+  Main,
   NewPlayerWrapper,
   NewPlayerInput,
   AddPlayerButton,
@@ -56,6 +56,7 @@ function App() {
   const [isTeamsEnabled, toggleTeams] = useState(true);
   const [isPlayerPopupVisible, setPlayerPopupVisible] = useState(false);
   const [sortedBy, setSortedBy] = useState(0);
+  const [isStreamerMode, toggleStreamerMode] = useState(false);
 
   const newPlayerObj = {
     name: newPlayerName,
@@ -170,7 +171,7 @@ function App() {
   };
 
   return (
-    <Body>
+    <Main isStreamerMode={isStreamerMode}>
       <PlayerPopUpWrapper isPlayerPopupVisible={isPlayerPopupVisible}>
         <PlayerPopUp isPlayerPopupVisible={isPlayerPopupVisible}>
           <H1>
@@ -343,6 +344,18 @@ function App() {
           </SliderLabel>
         </OptionWrapper>
 
+        <OptionWrapper toggleStreamerMode={toggleStreamerMode}>
+          <Label>Toggle Streamer Mode</Label>
+          <SliderLabel>
+            <SliderCheckbox
+              type="checkbox"
+              checked={isStreamerMode}
+              onChange={() => toggleStreamerMode(!isStreamerMode)}
+            />
+            <Slider isEditMode={isStreamerMode} />
+          </SliderLabel>
+        </OptionWrapper>
+
         <OptionWrapper isEditMode={isEditMode}>
           <Label>Amount of Scores</Label>
           <NumberInput
@@ -394,7 +407,7 @@ function App() {
           </InputWrapper>
         </ScoreOptionWrapper>
       </SettingsWrapper>
-    </Body>
+    </Main>
   );
 }
 
