@@ -344,7 +344,7 @@ function App() {
           </SliderLabel>
         </OptionWrapper>
 
-        <OptionWrapper toggleStreamerMode={toggleStreamerMode}>
+        <OptionWrapper isEditMode={isEditMode}>
           <Label>Toggle Streamer Mode</Label>
           <SliderLabel>
             <SliderCheckbox

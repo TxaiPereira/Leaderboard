@@ -36,7 +36,7 @@ export const Main = styled.main`
   width: 100%;
   margin: 0;
   @media only screen and (min-width: 992px) {
-    margin: 0 auto;
+    margin: ${(props) => (props.isStreamerMode === true ? "0" : "0 auto")};
     width: 60%;
   }
 `;
